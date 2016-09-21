@@ -13,7 +13,6 @@ import Helmet from 'react-helmet';
 import 'sanitize.css/sanitize.css';
 
 import AppHeader from 'components/AppHeader';
-// import AppFooter from 'components/AppFooter';
 
 import styles from './styles.css';
 

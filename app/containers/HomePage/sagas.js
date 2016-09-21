@@ -19,7 +19,6 @@ function* submitForm() {
   const simNumber = localStorage.getItem('simNumber');
   const simExpiryDate = localStorage.getItem('simExpiryDate');
   const ipAddress = localStorage.getItem('ipAddress');
-  const timeStamp = new Date().toISOString();
 
   const params = {
     name,
@@ -30,8 +29,7 @@ function* submitForm() {
     vehiclePlate,
     simNumber,
     simExpiryDate,
-    ipAddress,
-    timeStamp
+    ipAddress
   };
 
   const options = {
@@ -43,10 +41,17 @@ function* submitForm() {
     body: JSON.stringify(params)
   };
 
+  console.log('params: ' + params);
+
   const results = yield call(request, url, options);
 
   if (!results.err) {
-    yield put(submitFormSuccess(JSON.stringify(results.data.return)));
+    if (results.data.return === "GoProteksi registration successful") {
+      yield put(submitFormSuccess(JSON.stringify(results.data.return)));
+    }
+    else {
+      yield put(submitFormFailure(JSON.stringify(results.data.return)));
+    }
   } else {
     yield put(submitFormFailure(JSON.stringify(results.err)));
   }
