@@ -15,6 +15,8 @@ import {
   selectData,
   selectSubmitted,
   selectError,
+  selectIPAddress,
+  selectFullBenefits,
 } from './selectors';
 import { submitFormRequest } from './actions';
 import { createStructuredSelector } from 'reselect';
@@ -35,6 +37,7 @@ import LoadingIndicator from 'components/LoadingIndicator';
 import GoProteksi from './goproteksi.png';
 import Benefits from './benefits.jpg';
 import Benefits2 from './benefits2.jpg';
+import classNames from 'classnames/bind';
 
 const tncMessage = 'Saya setuju untuk mengambil program asuransi dengan manfaat terlampir, dimana saya akan mengikuti program beli asuransi 2 bulan gratis 1 bulan dengan harga premi per bulan Rp. 15,000 yang akan di bayarkan melalui GO Credit saya.';
 const genderOptions = ['male', 'female'];
@@ -42,11 +45,13 @@ const genderOptions = ['male', 'female'];
 export class HomePage extends React.Component {
 
   componentDidMount() {
+    // get ip address. if success update state and store in localstorage
   }
   
   render() {
+    const benefitsImage = this.props.fullBenefits ? Benefits : Benefits2;
     let mainContent = null;
-    if (!this.props.ipAddress) {
+    if (this.props.ipAddress) {
       mainContent = (<List component={LoadingIndicator} />);
     }
     else if (this.props.submitted) {
@@ -63,8 +68,9 @@ export class HomePage extends React.Component {
             <FormTextInput name="mobileNumber" label="Nomor HP" minLength="10" maxLength="15" />
             <FormTextInput name="simNumber" label="Nomor SIM" minLength="12" maxLength="12" />
             <FormDatePicker name="simExpiryDate" title="Expiry Date SIM" />
-            <FormTextInput type="vehicleAge" name="vehicleAge" label="Usia Kendaraan" minLength="1" maxLength="2" />
-            <FormTextInput type="vehiclePlate" name="vehiclePlate" label="Nomor Plat" minLength="3" maxLength="9" />
+            <FormTextInput name="vehicleAge" label="Usia Kendaraan" minLength="1" maxLength="2" />
+            <FormTextInput name="vehiclePlate" label="Nomor Plat" minLength="3" maxLength="9" />
+            <img className={styles.benefits} src={benefitsImage} alt="Benefits" />
             <FormCheckbox name="tncCheckbox" value="tncCheckbox" message={tncMessage} />
             <button type="submit" value="Submit" className={styles.buttonCustom}>Daftar Sekarang</button>
           </form>
@@ -95,6 +101,7 @@ HomePage.propTypes = {
     React.PropTypes.string,
     React.PropTypes.bool,
   ]),
+  fullBenefits: React.PropTypes.bool,
   onSubmitForm: React.PropTypes.func,
 };
 
@@ -114,6 +121,8 @@ const mapStateToProps = createStructuredSelector({
   data: selectData(),
   submitted: selectSubmitted(),
   error: selectError(),
+  ipAddress: selectIPAddress(),
+  fullBenefits: selectFullBenefits(),
 });
 
 // Wrap the component to inject dispatch and state into it

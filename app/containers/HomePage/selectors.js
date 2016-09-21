@@ -26,10 +26,22 @@ const selectError = () => createSelector(
   (homeState) => homeState.get('error')
 );
 
+const selectIPAddress = () => createSelector(
+  selectHome(),
+  (homeState) => homeState.get('ipAddress')
+);
+
+const selectFullBenefits = () => createSelector(
+  selectHome(),
+  (homeState) => homeState.get('fullBenefits')
+);
+
 export {
   selectHome,
   selectStatus,
   selectData,
   selectSubmitted,
   selectError,
+  selectIPAddress,
+  selectFullBenefits,
 };

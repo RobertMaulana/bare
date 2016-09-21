@@ -3,6 +3,8 @@ import {
   SUBMIT_FORM_REQUEST,
   SUBMIT_FORM_SUCCESS,
   SUBMIT_FORM_FAILURE,
+  UPDATE_VEHICLE_AGE,
+  OBTAIN_IP_ADDRESS,
 } from './constants';
 
 const initialState = fromJS({
@@ -10,6 +12,8 @@ const initialState = fromJS({
   data: false,
   submitted: false,
   error: false,
+  ipAddress: false,
+  fullBenefits: true,
 });
 
 function homePageReducer(state = initialState, action = null) {
@@ -31,6 +35,12 @@ function homePageReducer(state = initialState, action = null) {
         .set('data', fromJS(action.data))
         .set('submitted', false)
         .set('error', true)
+    case UPDATE_VEHICLE_AGE:
+      return state
+        .set('fullBenefits', action.data <= 5)
+    case OBTAIN_IP_ADDRESS:
+      return state
+        .set('ipAddress', action.data)
     default:
       return state;
   }

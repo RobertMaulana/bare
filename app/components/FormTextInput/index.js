@@ -5,10 +5,13 @@
 */
 
 import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
 
 import TickIcon from './tick-icon.png';
 import styles from './styles.css';
+
+import { updateVehicleAge } from 'containers/HomePage/actions';
 
 class FormTextInput extends React.Component {
 
@@ -124,6 +127,7 @@ class FormTextInput extends React.Component {
   }
 
   handleBlur(e) {
+
     this.setState({ isEditing: false });
     if (e.target.value === '') {
       this.setState({ isError: true });
@@ -157,6 +161,8 @@ class FormTextInput extends React.Component {
           this.setState({ errorMessage: 'Nomor SIM tidak valid' });
           this.setState({ isError: true });
         }
+      } else if (e.target.name === 'vehicleAge' ) {
+        this.props.updateVehicleAge(e.target.value);
       } else if (e.target.name === 'vehiclePlate' ) {
         if (this.validPlatNumber(e.target.value)) {
           this.setState({ isError: false });
@@ -237,4 +243,12 @@ FormTextInput.propTypes = {
   minLength: PropTypes.string,
 };
 
-export default FormTextInput;
+export function mapDispatchToProps(dispatch) {
+  return {
+    updateVehicleAge: (age) => dispatch(updateVehicleAge(age)),
+    dispatch,
+  };
+}
+
+// export default FormTextInput;
+export default connect(null, mapDispatchToProps)(FormTextInput);
