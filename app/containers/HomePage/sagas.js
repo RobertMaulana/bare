@@ -1,55 +1,62 @@
-/**
- * Gets the repositories of the user from Github
- */
-
-import { take, call, put, select, fork, cancel } from 'redux-saga/effects';
-import { LOCATION_CHANGE } from 'react-router-redux';
-import { LOAD_REPOS } from 'containers/App/constants';
-import { reposLoaded, repoLoadingError } from 'containers/App/actions';
+import { takeLatest } from 'redux-saga';
+import { take, call, put, fork } from 'redux-saga/effects';
+import { SUBMIT_FORM_REQUEST } from './constants';
+import { submitFormSuccess, submitFormFailure } from './actions';
 
 import request from 'utils/request';
-import { selectUsername } from 'containers/HomePage/selectors';
 
-/**
- * Github repos request/response handler
- */
-export function* getRepos() {
-  // Select username from store
-  const username = yield select(selectUsername());
-  const requestURL = `https://api.github.com/users/${username}/repos?type=all&sort=updated`;
-
+// Individual exports for testing
+function* submitForm() {
   // Call our request helper (see 'utils/request')
-  const repos = yield call(request, requestURL);
+  const url = 'https://api.pasarpolis.com/goproteksi/';
 
-  if (!repos.err) {
-    yield put(reposLoaded(repos.data, username));
+  const name = localStorage.getItem('name');
+  const gender = localStorage.getItem('gender');
+  const vehicleAge = localStorage.getItem('vehicleAge');
+  const email = localStorage.getItem('email');
+  const mobileNumber = localStorage.getItem('mobileNumber');
+  const vehiclePlate = localStorage.getItem('vehiclePlate');
+  const simNumber = localStorage.getItem('simNumber');
+  const simExpiryDate = localStorage.getItem('simExpiryDate');
+  const ipAddress = localStorage.getItem('ipAddress');
+  const timeStamp = new Date().toISOString();
+
+  const params = {
+    name,
+    gender,
+    vehicleAge,
+    email,
+    mobileNumber,
+    vehiclePlate,
+    simNumber,
+    simExpiryDate,
+    ipAddress,
+    timeStamp
+  };
+
+  const options = {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(params)
+  };
+
+  const results = yield call(request, url, options);
+
+  if (!results.err) {
+    yield put(submitFormSuccess(JSON.stringify(results.data.return)));
   } else {
-    yield put(repoLoadingError(repos.err));
+    yield put(submitFormFailure(JSON.stringify(results.err)));
   }
 }
 
-/**
- * Watches for LOAD_REPOS action and calls handler
- */
-export function* getReposWatcher() {
-  while (yield take(LOAD_REPOS)) {
-    yield call(getRepos);
-  }
+function* defaultSaga() {
+  yield fork (takeLatest, "SUBMIT_FORM_REQUEST", submitForm);
 }
 
-/**
- * Root saga manages watcher lifecycle
- */
-export function* githubData() {
-  // Fork watcher so we can continue execution
-  const watcher = yield fork(getReposWatcher);
-
-  // Suspend execution until location changes
-  yield take(LOCATION_CHANGE);
-  yield cancel(watcher);
-}
-
-// Bootstrap sagas
+// All sagas to be loaded
 export default [
-  githubData,
+  defaultSaga,
 ];

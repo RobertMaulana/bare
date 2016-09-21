@@ -1,35 +1,39 @@
-/*
- * HomeReducer
- *
- * The reducer takes care of our data. Using actions, we can change our
- * application state.
- * To add a new action, add it to the switch statement in the reducer function
- *
- * Example:
- * case YOUR_ACTION_CONSTANT:
- *   return state.set('yourStateVariable', true);
- */
-
-import {
-  CHANGE_USERNAME,
-} from './constants';
 import { fromJS } from 'immutable';
+import {
+  SUBMIT_FORM_REQUEST,
+  SUBMIT_FORM_SUCCESS,
+  SUBMIT_FORM_FAILURE,
+} from './constants';
 
-// The initial state of the App
 const initialState = fromJS({
-  username: '',
+  status: 'SUBMIT_FORM_EMPTY',
+  data: false,
+  submitted: false,
+  error: false,
 });
 
-function homeReducer(state = initialState, action) {
+function homePageReducer(state = initialState, action = null) {
   switch (action.type) {
-    case CHANGE_USERNAME:
-
-      // Delete prefixed '@' from the github username
+    case SUBMIT_FORM_REQUEST:
       return state
-        .set('username', action.name.replace(/@/gi, ''));
+        .set('status', 'SUBMIT_FORM_REQUEST')
+        .set('submitted', false)
+        .set('error', false)
+      case SUBMIT_FORM_SUCCESS:
+      return state
+        .set('status', 'SUBMIT_FORM_SUCCESS')
+        .set('data', fromJS(action.data))
+        .set('submitted', true)
+        .set('error', false)
+    case SUBMIT_FORM_FAILURE:
+      return state
+        .set('status', 'SUBMIT_FORM_FAILURE')
+        .set('data', fromJS(action.data))
+        .set('submitted', false)
+        .set('error', true)
     default:
       return state;
   }
 }
 
-export default homeReducer;
+export default homePageReducer;

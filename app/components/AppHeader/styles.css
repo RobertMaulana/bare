@@ -1,0 +1,21 @@
+.header {
+  padding-left: 16px;
+  padding-right: 16px;
+  height: 50px;
+  width: 100%;
+  max-width: calc(768px + 16px * 2);
+  background: #F6D200;
+  margin: 0 auto;
+}
+
+.header .pplogo {
+  padding-top: 15px;
+  float: left;
+  width: 140px;
+}
+
+.header .gojeklogo {
+  padding-top: 10px;
+  float: right;
+  width: 90px;
+}

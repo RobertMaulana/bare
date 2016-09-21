@@ -7,6 +7,7 @@
 import React, { PropTypes } from 'react';
 
 import styles from './styles.css';
+import classNames from 'classnames/bind';
 
 function capitalizeFirstLetter(string) {
   if (string) {
@@ -22,7 +23,7 @@ class FormRadioInput extends React.Component {
     super(props);
     this.handleChange = this.handleChange.bind(this);
     if (!storedValue) {
-      storedValue = props.options[0];
+      storedValue = null;
       localStorage.setItem(this.props.name, storedValue);
     }
     this.state = {
@@ -36,36 +37,48 @@ class FormRadioInput extends React.Component {
   }
 
   render() {
-    const { options, name, altname } = this.props;
+    const { options, name, altname, id, type } = this.props;
     const title = altname || capitalizeFirstLetter(name);
+    const cx = classNames.bind(styles);
+    let radioContainer;
+    if (name === 'health_time' || name === 'car_time' || name === 'motorcycle_time' || name === 'personalaccident_time' || name === 'travel_time' || name === 'life_time') {
+      radioContainer = cx(styles.radioContainerTime);
+    } else {
+      radioContainer = cx(styles.radioContainer);
+    }
     const radios = options.map((option, i) => {
       const isChecked = this.state.value === option;
+      let idValue;
+      if(type === 'travel') {
+        idValue = id+i;
+      }else{
+        idValue = option;
+      }
       return (
-        <div className={styles.radioContainer} key={i}>
-          <input type="radio" id={option} name={name} value={option} onChange={this.handleChange} checked={isChecked} />
-          <label htmlFor={option}><span><span></span></span>{capitalizeFirstLetter(option)}</label>
+        <div className={radioContainer} key={i}>
+          <input type="radio" id={idValue} name={name} value={option} onChange={this.handleChange} checked={isChecked} />
+          <label htmlFor={idValue}><span><span></span></span><div className={styles.optionValue}>{capitalizeFirstLetter(option)}</div></label>
         </div>
       );
     });
     return (
       <div className={styles.formRadioInput}>
-        <span>{title}</span>
+        <div className={styles.boxTitle}>
+          <span>{title}</span>
+        </div>
         {radios}
       </div>
     );
   }
 }
 
-// <span key={i}>
-//   <input type="radio" name={name} value={option} onChange={this.handleChange} checked={isChecked} />
-//   <label>&nbsp;{capitalizeFirstLetter(option)}</label>
-// </span>
-
 FormRadioInput.propTypes = {
   name: PropTypes.string.isRequired,
   options: PropTypes.array.isRequired,
   isChecked: PropTypes.bool,
   altname: PropTypes.string,
+  id: PropTypes.string,
+  type: PropTypes.string,
 };
 
 export default FormRadioInput;

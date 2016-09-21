@@ -12,7 +12,6 @@ function ThankYouPage() {
   return (
     <div className={styles.thankYouPage}>
       <h1>Terima Kasih</h1>
-      <iframe width="100%" height="auto" src="https://www.youtube.com/embed/WdMXuygTO-I?autoplay=1" frameBorder="0" allowFullScreen></iframe>
       <br />
       <p>SELAMAT! Anda terlindungi dengan Asuransi Mudik - Mega Insurance dari Pasarpolis.com yang membuat mudik anda bebas cemas dan terlindungi.</p>
       <br />

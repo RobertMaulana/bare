@@ -39,6 +39,13 @@ export default function createRoutes(store) {
         importModules.catch(errorLoading);
       },
     }, {
+      path: '/thank-you',
+      getComponent(location, cb) {
+        System.import('components/ThankYouPage')
+          .then(loadModule(cb))
+          .catch(errorLoading);
+      },
+    }, {
       path: '/features',
       name: 'features',
       getComponent(nextState, cb) {

@@ -9,157 +9,95 @@ import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import Helmet from 'react-helmet';
 
-import messages from './messages';
+import {
+  selectHome,
+  selectStatus,
+  selectData,
+  selectSubmitted,
+  selectError,
+} from './selectors';
+import { submitFormRequest } from './actions';
 import { createStructuredSelector } from 'reselect';
 
-import {
-  selectRepos,
-  selectLoading,
-  selectError,
-} from 'containers/App/selectors';
-
-import {
-  selectUsername,
-} from './selectors';
-
-import { changeUsername } from './actions';
-import { loadRepos } from '../App/actions';
-
+import messages from './messages';
 import { FormattedMessage } from 'react-intl';
-import RepoListItem from 'containers/RepoListItem';
-import Button from 'components/Button';
-import H2 from 'components/H2';
-import List from 'components/List';
-import ListItem from 'components/ListItem';
-import LoadingIndicator from 'components/LoadingIndicator';
 
 import styles from './styles.css';
 
+import ThankYouPage from 'components/ThankYouPage';
+import FormTextInput from 'components/FormTextInput';
+import FormRadioInput from 'components/FormRadioInput';
+import FormDatePicker from 'components/FormDatePicker';
+import FormCheckbox from 'components/FormCheckbox';
+
+import GoProteksi from './goproteksi.png';
+
+const tncMessage = 'Saya setuju untuk mengambil program asuransi dengan manfaat terlampir, dimana saya akan mengikuti program beli asuransi 2 bulan gratis 1 bulan dengan harga premi per bulan Rp. 15,000 yang akan di bayarkan melalui GO Credit saya.';
+const genderOptions = ['male', 'female'];
+
 export class HomePage extends React.Component {
-  /**
-   * when initial state username is not null, submit the form to load repos
-   */
-  componentDidMount() {
-    if (this.props.username && this.props.username.trim().length > 0) {
-      this.props.onSubmitForm();
-    }
-  }
-  /**
-   * Changes the route
-   *
-   * @param  {string} route The route we want to go to
-   */
-  openRoute = (route) => {
-    this.props.changeRoute(route);
-  };
-
-  /**
-   * Changed route to '/features'
-   */
-  openFeaturesPage = () => {
-    this.openRoute('/features');
-  };
-
+  
   render() {
     let mainContent = null;
-
-    // Show a loading indicator when we're loading
-    if (this.props.loading) {
-      mainContent = (<List component={LoadingIndicator} />);
-
-    // Show an error if there is one
-    } else if (this.props.error !== false) {
-      const ErrorComponent = () => (
-        <ListItem item={'Something went wrong, please try again!'} />
-      );
-      mainContent = (<List component={ErrorComponent} />);
-
-    // If we're not loading, don't have an error and there are repos, show the repos
-    } else if (this.props.repos !== false) {
-      mainContent = (<List items={this.props.repos} component={RepoListItem} />);
+    if (this.props.submitted) {
+      mainContent = (<ThankYouPage />);
+    } else {
+      mainContent = (
+        <div>
+          <img className={styles.goproteksi} src={GoProteksi} alt="GoProteksi Logo" />
+          <form onSubmit={this.props.onSubmitForm} id="goproteksiform">
+            <FormTextInput ref="a" type="text" name="name" label="Nama Lengkap" minLength="2" maxLength="100" />
+            <FormRadioInput name="gender" altname="Jenis Kelamin" options={genderOptions} />
+            <FormTextInput ref="b" name="email" label="Email" minLength="7" maxLength="50" />
+            <FormTextInput ref="c" name="mobileNumber" label="Nomor HP" minLength="10" maxLength="13" />
+            <FormTextInput ref="d" name="simNumber" label="Nomor SIM" minLength="12" maxLength="12" />
+            <FormDatePicker ref="e" name="simExpiryDate" title="Expiry Date SIM" />
+            <FormTextInput ref="f" type="vehicleAge" name="vehicleAge" label="Usia Kendaraan" minLength="1" maxLength="2" />
+            <FormTextInput ref="g" type="vehiclePlate" name="vehiclePlate" label="Nomor Plat" minLength="3" maxLength="9" />
+            <FormCheckbox name="tncCheckbox" value="tncCheckbox" message={tncMessage} />
+            <button type="submit" value="Submit" className={styles.buttonCustom}>Daftar Sekarang</button>
+          </form>
+        </div>
+        );
     }
 
     return (
-      <article>
-        <Helmet
-          title="Home Page"
-          meta={[
-            { name: 'description', content: 'A React.js Boilerplate application homepage' },
-          ]}
-        />
-        <div>
-          <section className={`${styles.textSection} ${styles.centered}`}>
-            <H2>
-              <FormattedMessage {...messages.startProjectHeader} />
-            </H2>
-            <p>
-              <FormattedMessage {...messages.startProjectMessage} />
-            </p>
-          </section>
-          <section className={styles.textSection}>
-            <H2>
-              <FormattedMessage {...messages.trymeHeader} />
-            </H2>
-            <form className={styles.usernameForm} onSubmit={this.props.onSubmitForm}>
-              <label htmlFor="username">
-                <FormattedMessage {...messages.trymeMessage} />
-                <span className={styles.atPrefix}>
-                  <FormattedMessage {...messages.trymeAtPrefix} />
-                </span>
-                <input
-                  id="username"
-                  className={styles.input}
-                  type="text"
-                  placeholder="mxstbr"
-                  value={this.props.username}
-                  onChange={this.props.onChangeUsername}
-                />
-              </label>
-            </form>
-            {mainContent}
-          </section>
-          <Button handleRoute={this.openFeaturesPage}>
-            <FormattedMessage {...messages.featuresButton} />
-          </Button>
-        </div>
-      </article>
+      <div>
+        {mainContent}
+      </div>
     );
   }
 }
 
 HomePage.propTypes = {
   changeRoute: React.PropTypes.func,
-  loading: React.PropTypes.bool,
+  submitted: React.PropTypes.bool,
   error: React.PropTypes.oneOfType([
     React.PropTypes.object,
     React.PropTypes.bool,
   ]),
-  repos: React.PropTypes.oneOfType([
+  data: React.PropTypes.oneOfType([
     React.PropTypes.array,
     React.PropTypes.bool,
   ]),
   onSubmitForm: React.PropTypes.func,
-  username: React.PropTypes.string,
-  onChangeUsername: React.PropTypes.func,
 };
 
 export function mapDispatchToProps(dispatch) {
   return {
-    onChangeUsername: (evt) => dispatch(changeUsername(evt.target.value)),
     changeRoute: (url) => dispatch(push(url)),
     onSubmitForm: (evt) => {
       if (evt !== undefined && evt.preventDefault) evt.preventDefault();
-      dispatch(loadRepos());
+      dispatch(submitFormRequest());
     },
-
     dispatch,
   };
 }
 
 const mapStateToProps = createStructuredSelector({
-  repos: selectRepos(),
-  username: selectUsername(),
-  loading: selectLoading(),
+  status: selectStatus(),
+  data: selectData(),
+  submitted: selectSubmitted(),
   error: selectError(),
 });
 

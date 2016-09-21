@@ -1,28 +1,58 @@
 .formRadioInput {
-  height: 59px;
+  height: 65px;
   width: 100%;
-  padding: 1em 1.5em;
-  border-bottom: 1px solid rgb(227, 227, 232);
+  padding: 0 16px;
+  padding-top: 5px;
+  max-width: calc(768px + 16px * 2);
+  margin: 0 auto;
+  margin-bottom: 5px;
 }
 
-.radioContainer {
+.radioContainer,
+.radioContainerTime {
   display: inline-block;
-  margin-right: 1em;
   font-size: 14px;
   color: #999;
+  text-align: center;
+  width: 50%;
+  margin: 0 auto;
 }
+
+.radioContainerTime {
+  width: 33.33333%;
+}
+
 
 .formRadioInput input[type='radio'] {
   position: relative;
   top: -16px;
-  width: 20px;
+  width: 13px;
   float: left !important;
 }
 
-.formRadioInput span {
-  font-size: 14px;
+.formRadioInput .boxTitle {
+  width: 100%;
+  height: auto;
+}
+
+.boxTitle span {
+  font-size: 12px;
   color: #999;
   margin-right: 0.5em;
+}
+
+.optionValue,
+.radioContainerTime .optionValue {
+  position: relative;
+  top: -2.5em;
+  color: #252525;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.radioContainerTime .optionValue {
+  font-size: 12px;
+  top: -2.9em;
 }
 
 /* Styling taken from http://code.stephenmorley.org/html-and-css/styling-checkboxes-and-radio-buttons/ */
@@ -44,20 +74,24 @@ input[type='radio']:not(old) + label {
 }
 
 input[type='checkbox']:not(old) + label > span,
-input[type='radio']:not(old) + label > span {
+input[type='radio']:not(old) + label > span,
+.radioContainerTime input[type='checkbox']:not(old) + label > span,
+.radioContainerTime input[type='radio']:not(old) + label > span {
   display: inline-block;
-  width: 1.2em;
-  height: 1.2em;
+  width: calc(40vw - 15px);
+  height: calc(14vw - 15px);
   margin: 0.25em 0.5em 0.25em 0.25em;
-  border: 0.0625em solid rgb(192, 192, 192);
-  border-radius: 1em;
-  background: rgb(224, 224, 224);
-  background-image: -moz-linear-gradient(rgb(240, 240, 240), rgb(224, 224, 224));
-  background-image: -ms-linear-gradient(rgb(240, 240, 240), rgb(224, 224, 224));
-  background-image: -o-linear-gradient(rgb(240, 240, 240), rgb(224, 224, 224));
-  background-image: -webkit-linear-gradient(rgb(240, 240, 240), rgb(224, 224, 224));
-  background-image: linear-gradient(rgb(240, 240, 240), rgb(224, 224, 224));
-  vertical-align: bottom;
+  border: 1px solid #E1E1E1;
+  border-radius: 5px;
+  background: #FFF;
+  vertical-align: middle;
+  max-height: 40px;
+  max-width: 360px;
+}
+
+.radioContainerTime input[type='checkbox']:not(old) + label > span,
+.radioContainerTime input[type='radio']:not(old) + label > span {
+  width: calc(31vw - 15px);
 }
 
 input[type='checkbox']:not(old) + label > span {
@@ -85,17 +119,30 @@ input[type='checkbox']:not(old):checked + label > span::before {
   font-weight: bold;
 }
 
-input[type='radio']:not(old):checked + label > span > span {
+input[type='radio']:not(old):checked + label > span > span,
+.radioContainerTime input[type='radio']:not(old):checked + label > span > span {
   display: block;
-  width: 1.2em;
-  height: 1.2em;
+  width: calc(40vw - 15px);
+  height: calc(14vw - 15px);
   margin: -0.1em;
-  border: 0.0625em solid rgb(55, 55, 55);
-  border-radius: 0.8em;
-  background: rgb(55, 55, 55);
-  background-image: -moz-linear-gradient(rgb(55, 55, 55), rgb(55, 55, 55));
-  background-image: -ms-linear-gradient(rgb(55, 55, 55), rgb(55, 55, 55));
-  background-image: -o-linear-gradient(rgb(55, 55, 55), rgb(55, 55, 55));
-  background-image: -webkit-linear-gradient(rgb(55, 55, 55), rgb(55, 55, 55));
-  background-image: linear-gradient(rgb(55, 55, 55), rgb(55, 55, 55));
+  border: 1px solid #F6D200;
+  border-radius: 5px;
+  background: #F6D200;
+  max-height: 40px;
+  max-width: 360px;
+}
+
+.radioContainerTime input[type='radio']:not(old):checked + label > span > span {
+  width: calc(31vw - 15px); 
+}
+
+@media screen and (max-width: 320px) {
+  .optionValue {
+    position: relative;
+    top: -31px;
+  }
+  .radioContainerTime .optionValue {
+    position: relative;
+    top: -30px;
+  }
 }

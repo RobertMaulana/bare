@@ -29,13 +29,21 @@ class FormTextInput extends React.Component {
         errorState = !this.validEmail(storedValue);
         errorMessage = 'Email tidak valid';
         break;
-      case 'phone':
+      case 'mobileNumber':
         errorState = !this.validHPNumber(storedValue);
         errorMessage = 'Nomor HP tidak valid';
         break;
-      case 'zipcode':
-        errorState = !this.validZipCode(storedValue);
-        errorMessage = 'Zipcode tidak valid';
+      case 'simNumber':
+        errorState = !this.validSIMNumber(storedValue);
+        errorMessage = 'Nomor SIM tidak valid';
+        break;
+      case 'simExpiryDate':
+        break;
+      case 'vehicleAge':
+        break;
+      case 'vehiclePlate':
+        errorState = !this.validPlatNumber(storedValue);
+        errorMessage = 'Plat Nomor tidak valid';
         break;
       default:
         errorState = !this.validText(storedValue);
@@ -83,16 +91,28 @@ class FormTextInput extends React.Component {
     return matched;
   }
 
-  validZipCode(e) {
-    const zipcodeValidate = /^[0-9]{5}$/;
-    const matched = e.match(zipcodeValidate);
+  validSIMNumber(e) {
+    const simNumberValidate = /^[0-9]{12}$/;
+    const matched = e.match(simNumberValidate);
+    return matched;
+  }
+
+  validIDNumber(e) {
+    const idNumberValidate = /^[0-9]{6}([0-2][0-9]|3[0-1])(0[1-9]|1[0-2])[0-9]{6}$/;
+    const matched = e.match(idNumberValidate);
+    return matched;
+  }
+
+  validPlatNumber(e) {
+    const platNumberValidate = /^[a-zA-Z]{1,2}([0-9]{1,4})[a-zA-Z]{1,3}$/;
+    const matched = e.match(platNumberValidate);
     return matched;
   }
 
   handleChange(e) {
     this.setState({ value: e.target.value });
     localStorage.setItem(this.props.name, e.target.value);
-    if (e.target.type === 'text') {
+    if (e.target.name === 'name') {
       const charValidate = /^[a-zA-Z \s]*$/;
       if (e.target.value.match(charValidate)) {
         this.setState({ hasIllegalCharacter: false });
@@ -116,28 +136,35 @@ class FormTextInput extends React.Component {
       this.setState({ isEmpty: false });
       this.setState({ labelShouldMinimize: true });
       localStorage.setItem(`${this.props.name}ShouldMinimize`, '1');
-      if (e.target.name === 'email') {
+      if (e.target.type === 'email') {
         if (this.validEmail(e.target.value)) {
           this.setState({ isError: false });
         } else {
           this.setState({ errorMessage: 'Email tidak valid' });
           this.setState({ isError: true });
         }
-      } else if (e.target.name === 'phone') {
-        if (this.validNumber(e.target.value)) {
+      } else if (e.target.name === 'mobileNumber' ) {
+        if (this.validHPNumber(e.target.value)) {
           this.setState({ isError: false });
         } else {
           this.setState({ errorMessage: 'Nomor HP tidak valid' });
           this.setState({ isError: true });
         }
-      } else if (e.target.name === 'zipcode') {
-        if (this.validZipCode(e.target.value)) {
+      } else if (e.target.name === 'simNumber' ) {
+        if (this.validIDNumber(e.target.value)) {
           this.setState({ isError: false });
         } else {
-          this.setState({ errorMessage: 'Kode pos tidak valid' });
+          this.setState({ errorMessage: 'Nomor SIM tidak valid' });
           this.setState({ isError: true });
         }
-      } else if (e.target.type === 'text') {
+      } else if (e.target.name === 'vehiclePlate' ) {
+        if (this.validPlatNumber(e.target.value)) {
+          this.setState({ isError: false });
+        } else {
+          this.setState({ errorMessage: 'Plat Nomor tidak valid' });
+          this.setState({ isError: true });
+        }
+      } else if (e.target.name === 'name') {
         if (this.validText(e.target.value)) {
           this.setState({ isError: false });
         } else {
@@ -187,14 +214,14 @@ class FormTextInput extends React.Component {
     };
 
     return (
-      <div>
+      <div className={styles.formContainer}>
         <div className={errorTextClass}>
           <input type={type} id={this.props.name} name={this.props.name} value={this.state.value} onChange={this.handleChange} onFocus={this.handleFocus} onBlur={this.handleBlur} placeholder={this.props.placeholder} minLength={this.props.minLength} maxLength={this.props.maxLength} />
-          <label className={labelClass}>{this.props.label}</label>
+          <label htmlFor={this.props.name} className={labelClass}>{this.props.label}</label>
         </div>
         <div className={verifiedTickClass} style={divStyle}></div>
         <div className={errorClass}>
-          <label>{this.state.errorMessage}</label>
+          <label htmlFor={this.props.name} >{this.state.errorMessage}</label>
         </div>
       </div>
     );
