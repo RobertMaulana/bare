@@ -8,7 +8,7 @@ import request from 'utils/request';
 // Individual exports for testing
 function* submitForm() {
   // Call our request helper (see 'utils/request')
-  const url = 'https://api.pasarpolis.com/goproteksi/';
+  const url = 'https://api.pasarpolis.com/goproteksi/add';
 
   const name = localStorage.getItem('name');
   const gender = localStorage.getItem('gender');

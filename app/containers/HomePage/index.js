@@ -95,6 +95,7 @@ HomePage.propTypes = {
   ]),
   data: React.PropTypes.oneOfType([
     React.PropTypes.array,
+    React.PropTypes.string,
     React.PropTypes.bool,
   ]),
   ipAddress: React.PropTypes.oneOfType([

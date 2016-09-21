@@ -13,16 +13,13 @@ function ThankYouPage() {
     <div className={styles.thankYouPage}>
       <h1>Terima Kasih</h1>
       <br />
-      <p>SELAMAT! Anda terlindungi dengan Asuransi Mudik - Mega Insurance dari Pasarpolis.com yang membuat mudik anda bebas cemas dan terlindungi.</p>
+      <p>SELAMAT! Anda terlindungi dengan GO-PROTEKSI</p>
       <br />
       <span className={styles.text_bold}>Langkah Selanjutnya</span>
       <hr />
       <ul className={styles.checklist}>
-        <li>Mohon periksa email Anda untuk download ePolis</li>
-        <li>Polis akan berlaku 1 hari setelah registrasi</li>
+        <li>Please ensure that your SIM does not expire during the validity of the insurance policy or you will not be covered.</li>
       </ul>
-      <br />
-      <a href="https://www.pasarpolis.com/" className={styles.button}>Bandingkan Asuransi Lainnya</a>
     </div>
   );
 }

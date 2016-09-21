@@ -155,7 +155,7 @@ class FormTextInput extends React.Component {
           this.setState({ isError: true });
         }
       } else if (e.target.name === 'simNumber' ) {
-        if (this.validIDNumber(e.target.value)) {
+        if (this.validSIMNumber(e.target.value)) {
           this.setState({ isError: false });
         } else {
           this.setState({ errorMessage: 'Nomor SIM tidak valid' });
