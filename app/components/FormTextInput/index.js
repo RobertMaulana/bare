@@ -127,7 +127,6 @@ class FormTextInput extends React.Component {
   }
 
   handleBlur(e) {
-
     this.setState({ isEditing: false });
     if (e.target.value === '') {
       this.setState({ isError: true });
@@ -147,23 +146,23 @@ class FormTextInput extends React.Component {
           this.setState({ errorMessage: 'Email tidak valid' });
           this.setState({ isError: true });
         }
-      } else if (e.target.name === 'mobileNumber' ) {
+      } else if (e.target.name === 'mobileNumber') {
         if (this.validHPNumber(e.target.value)) {
           this.setState({ isError: false });
         } else {
           this.setState({ errorMessage: 'Nomor HP tidak valid' });
           this.setState({ isError: true });
         }
-      } else if (e.target.name === 'simNumber' ) {
+      } else if (e.target.name === 'simNumber') {
         if (this.validSIMNumber(e.target.value)) {
           this.setState({ isError: false });
         } else {
           this.setState({ errorMessage: 'Nomor SIM tidak valid' });
           this.setState({ isError: true });
         }
-      } else if (e.target.name === 'vehicleAge' ) {
+      } else if (e.target.name === 'vehicleAge') {
         this.props.updateVehicleAge(e.target.value);
-      } else if (e.target.name === 'vehiclePlate' ) {
+      } else if (e.target.name === 'vehiclePlate') {
         if (this.validPlatNumber(e.target.value)) {
           this.setState({ isError: false });
         } else {
@@ -193,22 +192,22 @@ class FormTextInput extends React.Component {
   render() {
     const cx = classNames.bind(styles);
     const type = this.props.type || 'text';
-    let errorClass = cx({
+    const errorClass = cx({
       error: this.state.isError,
       notError: !this.state.isError,
     });
 
-    let errorTextClass = cx({
+    const errorTextClass = cx({
       formTextInputError: (this.state.isError && !this.state.isEditing) || this.state.hasIllegalCharacter,
       formTextInput: !this.state.isError || this.state.isEditing,
     });
 
-    let labelClass = cx({
+    const labelClass = cx({
       labelTitle: !this.state.labelShouldMinimize,
       labelTitleFocus: this.state.labelShouldMinimize,
     });
 
-    let verifiedTickClass = cx({
+    const verifiedTickClass = cx({
       verifiedTickError: this.state.isError || this.state.isEmpty || this.state.isEditing,
       verifiedTick: !this.state.isError && !this.state.isEmpty && !this.state.isEditing,
     });
@@ -241,6 +240,7 @@ FormTextInput.propTypes = {
   type: PropTypes.string,
   maxLength: PropTypes.string,
   minLength: PropTypes.string,
+  updateVehicleAge: PropTypes.func,
 };
 
 export function mapDispatchToProps(dispatch) {

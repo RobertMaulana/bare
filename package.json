@@ -115,6 +115,12 @@
         2,
         "always-multiline"
       ],
+      "react/jsx-no-bind": [
+        1,
+        {
+          "allowBind": true
+        }
+      ],
       "import/imports-first": 0,
       "import/newline-after-import": 0,
       "import/no-extraneous-dependencies": 0,
@@ -165,6 +171,22 @@
     "rules": {
       "color-hex-case": "upper",
       "string-quotes": "single",
+      "selector-type-no-unknown": [
+        true,
+        {
+          "ignoreTypes": [
+            "old"
+          ]
+        }
+      ],
+      "declaration-block-no-duplicate-properties": [
+        true,
+        {
+          "ignore": [
+            "consecutive-duplicates-with-different-values"
+          ]
+        }
+      ],
       "font-family-name-quotes": "always-where-recommended",
       "selector-pseudo-class-no-unknown": [
         true,

@@ -49,9 +49,9 @@ class FormRadioInput extends React.Component {
     const radios = options.map((option, i) => {
       const isChecked = this.state.value === option;
       let idValue;
-      if(type === 'travel') {
-        idValue = id+i;
-      }else{
+      if (type === 'travel') {
+        idValue = id + i;
+      } else {
         idValue = option;
       }
       return (
@@ -75,7 +75,6 @@ class FormRadioInput extends React.Component {
 FormRadioInput.propTypes = {
   name: PropTypes.string.isRequired,
   options: PropTypes.array.isRequired,
-  isChecked: PropTypes.bool,
   altname: PropTypes.string,
   id: PropTypes.string,
   type: PropTypes.string,

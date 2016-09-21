@@ -7,12 +7,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
-import Helmet from 'react-helmet';
+// import Helmet from 'react-helmet';
 
 import {
-  selectHome,
   selectStatus,
-  selectData,
   selectSubmitted,
   selectError,
   selectIPAddress,
@@ -21,8 +19,8 @@ import {
 import { submitFormRequest } from './actions';
 import { createStructuredSelector } from 'reselect';
 
-import messages from './messages';
-import { FormattedMessage } from 'react-intl';
+// import messages from './messages';
+// import { FormattedMessage } from 'react-intl';
 
 import styles from './styles.css';
 
@@ -47,17 +45,15 @@ export class HomePage extends React.Component {
   componentDidMount() {
     // get ip address. if success update state and store in localstorage
   }
-  
+
   render() {
     const benefitsImage = this.props.fullBenefits ? Benefits : Benefits2;
     let mainContent = null;
     if (this.props.ipAddress) {
       mainContent = (<List component={LoadingIndicator} />);
-    }
-    else if (this.props.submitted) {
+    } else if (this.props.submitted) {
       mainContent = (<ThankYouPage />);
-    } 
-    else {
+    } else {
       mainContent = (
         <div>
           <img className={styles.goproteksi} src={GoProteksi} alt="GoProteksi Logo" />
@@ -87,17 +83,7 @@ export class HomePage extends React.Component {
 }
 
 HomePage.propTypes = {
-  changeRoute: React.PropTypes.func,
   submitted: React.PropTypes.bool,
-  error: React.PropTypes.oneOfType([
-    React.PropTypes.object,
-    React.PropTypes.bool,
-  ]),
-  data: React.PropTypes.oneOfType([
-    React.PropTypes.array,
-    React.PropTypes.string,
-    React.PropTypes.bool,
-  ]),
   ipAddress: React.PropTypes.oneOfType([
     React.PropTypes.string,
     React.PropTypes.bool,
@@ -119,7 +105,6 @@ export function mapDispatchToProps(dispatch) {
 
 const mapStateToProps = createStructuredSelector({
   status: selectStatus(),
-  data: selectData(),
   submitted: selectSubmitted(),
   error: selectError(),
   ipAddress: selectIPAddress(),

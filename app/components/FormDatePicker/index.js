@@ -25,7 +25,7 @@ class FormDatePicker extends React.Component {
     this.handleBlur = this.handleBlur.bind(this);
     if (!storedValue) {
       const d = new Date();
-      d.setTime(d.getTime() - d.getTimezoneOffset() * 60 * 1000);
+      d.setTime(d.getTime() - (d.getTimezoneOffset() * 60 * 1000));
       storedValue = d.toISOString().slice(0, 10);
       localStorage.setItem(this.props.name, storedValue);
     }
@@ -46,7 +46,7 @@ class FormDatePicker extends React.Component {
     const year = dateSplit[0];
     const month = dateSplit[1];
     const date = dateSplit[2];
-    const expiryDate = new Date(year, month-1, date);
+    const expiryDate = new Date(year, month - 1, date);
     const now = new Date();
     const simExpired = expiryDate < now;
     if (simExpired) {
@@ -59,12 +59,12 @@ class FormDatePicker extends React.Component {
   render() {
     const cx = classNames.bind(styles);
     const titleLabel = this.props.title ? <span>{capitalizeFirstLetter(this.props.title)}</span> : '';
-    let errorClass = cx({
+    const errorClass = cx({
       error: this.state.isError,
       notError: !this.state.isError,
     });
 
-    let errorTextClass = cx({
+    const errorTextClass = cx({
       formDatePickerError: this.state.isError,
       formDatePicker: !this.state.isError,
     });

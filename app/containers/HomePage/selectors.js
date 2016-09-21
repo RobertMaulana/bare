@@ -11,11 +11,6 @@ const selectStatus = () => createSelector(
   (homeState) => homeState.get('status')
 );
 
-const selectData = () => createSelector(
-  selectHome(),
-  (homeState) => homeState.get('data')
-);
-
 const selectSubmitted = () => createSelector(
   selectHome(),
   (homeState) => homeState.get('submitted')
@@ -39,7 +34,6 @@ const selectFullBenefits = () => createSelector(
 export {
   selectHome,
   selectStatus,
-  selectData,
   selectSubmitted,
   selectError,
   selectIPAddress,

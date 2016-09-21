@@ -7,34 +7,32 @@ import {
 } from './constants';
 
 export function submitFormRequest() {
-  return { 
+  return {
     type: SUBMIT_FORM_REQUEST,
   };
 }
 
-export function submitFormSuccess(data) {
+export function submitFormSuccess() {
   return {
     type: SUBMIT_FORM_SUCCESS,
-    data,
   };
 }
 
-export function submitFormFailure(data) {
+export function submitFormFailure() {
   return {
     type: SUBMIT_FORM_FAILURE,
-    data,
   };
 }
 
 export function updateVehicleAge(data) {
-  return { 
+  return {
     type: UPDATE_VEHICLE_AGE,
     data,
   };
 }
 
 export function obtainIPAddress(data) {
-  return { 
+  return {
     type: OBTAIN_IP_ADDRESS,
     data,
   };

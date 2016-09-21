@@ -1,5 +1,5 @@
 import { takeLatest } from 'redux-saga';
-import { take, call, put, fork } from 'redux-saga/effects';
+import { call, put, fork } from 'redux-saga/effects';
 import { SUBMIT_FORM_REQUEST } from './constants';
 import { submitFormSuccess, submitFormFailure } from './actions';
 
@@ -29,27 +29,24 @@ function* submitForm() {
     vehiclePlate,
     simNumber,
     simExpiryDate,
-    ipAddress
+    ipAddress,
   };
 
   const options = {
     method: 'POST',
     headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
     },
-    body: JSON.stringify(params)
+    body: JSON.stringify(params),
   };
-
-  console.log('params: ' + JSON.stringify(params));
 
   const results = yield call(request, url, options);
 
   if (!results.err) {
-    if (results.data.return === "GoProteksi registration successful") {
+    if (results.data.return === 'GoProteksi registration successful') {
       yield put(submitFormSuccess(JSON.stringify(results.data.return)));
-    }
-    else {
+    } else {
       yield put(submitFormFailure(JSON.stringify(results.data.return)));
     }
   } else {
@@ -58,7 +55,7 @@ function* submitForm() {
 }
 
 function* defaultSaga() {
-  yield fork (takeLatest, "SUBMIT_FORM_REQUEST", submitForm);
+  yield fork(takeLatest, SUBMIT_FORM_REQUEST, submitForm);
 }
 
 // All sagas to be loaded

@@ -22,7 +22,6 @@
   width: 33.33333%;
 }
 
-
 .formRadioInput input[type='radio'] {
   position: relative;
   top: -16px;
@@ -133,7 +132,7 @@ input[type='radio']:not(old):checked + label > span > span,
 }
 
 .radioContainerTime input[type='radio']:not(old):checked + label > span > span {
-  width: calc(31vw - 15px); 
+  width: calc(31vw - 15px);
 }
 
 @media screen and (max-width: 320px) {
@@ -141,6 +140,7 @@ input[type='radio']:not(old):checked + label > span > span,
     position: relative;
     top: -31px;
   }
+
   .radioContainerTime .optionValue {
     position: relative;
     top: -30px;
