@@ -18,7 +18,7 @@ function* submitForm() {
   const vehiclePlate = localStorage.getItem('vehiclePlate');
   const simNumber = localStorage.getItem('simNumber');
   const simExpiryDate = localStorage.getItem('simExpiryDate');
-  const ipAddress = localStorage.getItem('ipAddress');
+  const ipAddress = localStorage.getItem('ipAddress') || '1.1.1.1';
 
   const params = {
     name,
@@ -41,7 +41,7 @@ function* submitForm() {
     body: JSON.stringify(params)
   };
 
-  console.log('params: ' + params);
+  console.log('params: ' + JSON.stringify(params));
 
   const results = yield call(request, url, options);
 

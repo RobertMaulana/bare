@@ -31,13 +31,13 @@ import FormTextInput from 'components/FormTextInput';
 import FormRadioInput from 'components/FormRadioInput';
 import FormDatePicker from 'components/FormDatePicker';
 import FormCheckbox from 'components/FormCheckbox';
+import FormButton from 'components/FormButton';
 import List from 'components/List';
 import LoadingIndicator from 'components/LoadingIndicator';
 
 import GoProteksi from './goproteksi.png';
 import Benefits from './benefits.jpg';
 import Benefits2 from './benefits2.jpg';
-import classNames from 'classnames/bind';
 
 const tncMessage = 'Saya setuju untuk mengambil program asuransi dengan manfaat terlampir, dimana saya akan mengikuti program beli asuransi 2 bulan gratis 1 bulan dengan harga premi per bulan Rp. 15,000 yang akan di bayarkan melalui GO Credit saya.';
 const genderOptions = ['male', 'female'];
@@ -72,7 +72,7 @@ export class HomePage extends React.Component {
             <FormTextInput name="vehiclePlate" label="Nomor Plat" minLength="3" maxLength="9" />
             <img className={styles.benefits} src={benefitsImage} alt="Benefits" />
             <FormCheckbox name="tncCheckbox" value="tncCheckbox" message={tncMessage} />
-            <button type="submit" value="Submit" className={styles.buttonCustom}>Daftar Sekarang</button>
+            <FormButton name="submit" value="Daftar Sekarang" handleRoute={this.props.onSubmitForm} />
           </form>
         </div>
         );
