@@ -48,17 +48,17 @@ export class HomePage extends React.Component {
   }
 
   componentWillUnmount() {
-    if (this._timer) {
-      clearInterval(this._timer);
-      this._timer = null;
+    if (this.timer) {
+      clearInterval(this.timer);
+      this.timer = null;
     }
   }
 
   startPolling() {
-    var self = this;
-    setTimeout(function() {
+    const self = this;
+    setTimeout(() => {
       self.poll(); // do it once and then start it up ...
-      self._timer = setInterval(self.poll.bind(self), 1000);
+      self.timer = setInterval(self.poll.bind(self), 1000);
     }, 1000);
   }
 
@@ -70,10 +70,10 @@ export class HomePage extends React.Component {
   }
 
   handleFormSubmit = () => {
-    const textInputError = this.refs.field1.state.isEmpty || this.refs.field1.state.isError || this.refs.field3.state.isEmpty || this.refs.field3.state.isError || this.refs.field4.state.isEmpty || this.refs.field4.state.isError || this.refs.field5.state.isEmpty || this.refs.field5.state.isError || this.refs.field7.state.isEmpty || this.refs.field7.state.isError || this.refs.field8.state.isEmpty || this.refs.field8.state.isError;
-    const radioInputError = !this.refs.field2.state.value;
-    const datePickerError = !this.refs.field6.state.value || this.refs.field6.state.isError;
-    const checkBoxError = !this.refs.field9.state.checked;
+    const textInputError = this.field1.state.isEmpty || this.field1.state.isError || this.field3.state.isEmpty || this.field3.state.isError || this.field4.state.isEmpty || this.field4.state.isError || this.field5.state.isEmpty || this.field5.state.isError || this.field7.state.isEmpty || this.field7.state.isError || this.field8.state.isEmpty || this.field8.state.isError;
+    const radioInputError = !this.field2.state.value;
+    const datePickerError = !this.field6.state.value || this.field6.state.isError;
+    const checkBoxError = !this.field9.state.checked;
     const error = textInputError || radioInputError || datePickerError || checkBoxError;
     if (error) {
       alert('Formulir anda tidak komplit/ada data yang salah. Harap di rubah sebelum lanjut registrasi');
@@ -96,16 +96,16 @@ export class HomePage extends React.Component {
           <div>
             <img className={styles.goproteksi} src={GoProteksi} alt="GoProteksi Logo" />
             <form onSubmit={this.props.onSubmitForm} id="goproteksiform">
-              <FormTextInput ref="field1" type="text" name="name" label="Nama Lengkap (Sesuai KTP)" minLength="2" maxLength="100" />
-              <FormRadioInput ref="field2" name="gender" altname="Jenis Kelamin" options={genderOptions} />
-              <FormTextInput ref="field3" name="email" label="Email" minLength="7" maxLength="50" />
-              <FormTextInput ref="field4" name="mobileNumber" label="Nomor HP (yang terdaftar di Gojek)" minLength="10" maxLength="15" />
-              <FormTextInput ref="field5" name="simNumber" label="Nomor SIM" minLength="12" maxLength="12" />
-              <FormDatePicker ref="field6" name="simExpiryDate" title="Expiry Date SIM" />
-              <FormTextInput ref="field7" name="vehicleAge" label="Usia Kendaraan" minLength="1" maxLength="2" />
-              <FormTextInput ref="field8" name="vehiclePlate" label="Nomor Plat" minLength="3" maxLength="9" />
+              <FormTextInput ref={(c) => { this.field1 = c; }} type="text" name="name" label="Nama Lengkap (Sesuai KTP)" minLength="2" maxLength="100" />
+              <FormRadioInput ref={(c) => { this.field2 = c; }} name="gender" altname="Jenis Kelamin" options={genderOptions} />
+              <FormTextInput ref={(c) => { this.field3 = c; }} name="email" label="Email" minLength="7" maxLength="50" />
+              <FormTextInput ref={(c) => { this.field4 = c; }} name="mobileNumber" label="Nomor HP (yang terdaftar di Gojek)" minLength="10" maxLength="15" />
+              <FormTextInput ref={(c) => { this.field5 = c; }} name="simNumber" label="Nomor SIM" minLength="12" maxLength="12" />
+              <FormDatePicker ref={(c) => { this.field6 = c; }} name="simExpiryDate" title="Expiry Date SIM" />
+              <FormTextInput ref={(c) => { this.field7 = c; }} name="vehicleAge" label="Usia Kendaraan" minLength="1" maxLength="2" />
+              <FormTextInput ref={(c) => { this.field8 = c; }} name="vehiclePlate" label="Nomor Plat" minLength="3" maxLength="9" />
               <img className={styles.benefits} src={benefitsImage} alt="Benefits" />
-              <FormCheckbox ref="field9" name="tncCheckbox" value="tncCheckbox" message={tncMessage} />
+              <FormCheckbox ref={(c) => { this.field9 = c; }} name="tncCheckbox" value="tncCheckbox" message={tncMessage} />
               <FormButton name="submit" value="Daftar Sekarang" handleRoute={this.handleFormSubmit} />
             </form>
           </div>
@@ -130,6 +130,7 @@ HomePage.propTypes = {
   fullBenefits: React.PropTypes.bool,
   onSubmitForm: React.PropTypes.func,
   ipAddressRequest: React.PropTypes.func,
+  updateVehicleAge: React.PropTypes.func,
 };
 
 export function mapDispatchToProps(dispatch) {

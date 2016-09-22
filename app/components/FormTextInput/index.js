@@ -5,7 +5,6 @@
 */
 
 import React, { PropTypes } from 'react';
-import { connect } from 'react-redux';
 import classNames from 'classnames/bind';
 
 import TickIcon from './tick-icon.png';
@@ -158,7 +157,6 @@ class FormTextInput extends React.Component {
           this.setState({ errorMessage: 'Nomor SIM tidak valid' });
           this.setState({ isError: true });
         }
-      } else if (e.target.name === 'vehicleAge') {
       } else if (e.target.name === 'vehiclePlate') {
         if (this.validPlatNumber(e.target.value)) {
           this.setState({ isError: false });

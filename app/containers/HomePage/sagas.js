@@ -64,7 +64,7 @@ function* ipAddressRequestSaga() {
   if (results.err === undefined || results.err === null) {
     yield put(ipAddressSuccess(results.data.ipAddress));
   } else {
-    yield put(ipAddressRequest( ));
+    yield put(ipAddressRequest());
   }
 }
 
