@@ -78,7 +78,7 @@ export class HomePage extends React.Component {
     if (error) {
       alert('Formulir anda tidak komplit/ada data yang salah. Harap di rubah sebelum lanjut registrasi');
     } else {
-      // this.props.onSubmitForm();
+      this.props.onSubmitForm();
     }
   }
 
