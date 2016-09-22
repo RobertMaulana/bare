@@ -23,7 +23,7 @@ class FormRadioInput extends React.Component {
     super(props);
     this.handleChange = this.handleChange.bind(this);
     if (!storedValue) {
-      storedValue = null;
+      storedValue = this.props.options[0];
       localStorage.setItem(this.props.name, storedValue);
     }
     this.state = {

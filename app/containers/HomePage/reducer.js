@@ -4,7 +4,9 @@ import {
   SUBMIT_FORM_SUCCESS,
   SUBMIT_FORM_FAILURE,
   UPDATE_VEHICLE_AGE,
-  OBTAIN_IP_ADDRESS,
+  IP_ADDRESS_REQUEST,
+  IP_ADDRESS_SUCCESS,
+  IP_ADDRESS_FAILURE,
 } from './constants';
 
 const initialState = fromJS({
@@ -35,7 +37,10 @@ function homePageReducer(state = initialState, action = null) {
     case UPDATE_VEHICLE_AGE:
       return state
         .set('fullBenefits', action.data <= 5);
-    case OBTAIN_IP_ADDRESS:
+    case IP_ADDRESS_REQUEST:
+      return state
+        .set('ipAddress', false);
+    case IP_ADDRESS_SUCCESS:
       return state
         .set('ipAddress', action.data);
     default:

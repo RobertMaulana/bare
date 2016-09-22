@@ -3,7 +3,8 @@ import {
   SUBMIT_FORM_SUCCESS,
   SUBMIT_FORM_FAILURE,
   UPDATE_VEHICLE_AGE,
-  OBTAIN_IP_ADDRESS,
+  IP_ADDRESS_REQUEST,
+  IP_ADDRESS_SUCCESS,
 } from './constants';
 
 export function submitFormRequest() {
@@ -31,9 +32,15 @@ export function updateVehicleAge(data) {
   };
 }
 
-export function obtainIPAddress(data) {
+export function ipAddressRequest() {
   return {
-    type: OBTAIN_IP_ADDRESS,
+    type: IP_ADDRESS_REQUEST,
+  };
+}
+
+export function ipAddressSuccess(data) {
+  return {
+    type: IP_ADDRESS_SUCCESS,
     data,
   };
 }

@@ -16,7 +16,7 @@ import {
   selectIPAddress,
   selectFullBenefits,
 } from './selectors';
-import { submitFormRequest } from './actions';
+import { submitFormRequest, ipAddressRequest } from './actions';
 import { createStructuredSelector } from 'reselect';
 
 // import messages from './messages';
@@ -38,40 +38,51 @@ import Benefits from './benefits.jpg';
 import Benefits2 from './benefits2.jpg';
 
 const tncMessage = 'Saya setuju untuk mengambil program asuransi dengan manfaat terlampir, dimana saya akan mengikuti program beli asuransi 2 bulan gratis 1 bulan dengan harga premi per bulan Rp. 15,000 yang akan di bayarkan melalui GO Credit saya.';
-const genderOptions = ['male', 'female'];
+const genderOptions = ['pria', 'wanita'];
 
 export class HomePage extends React.Component {
 
   componentDidMount() {
-    // get ip address. if success update state and store in localstorage
+    this.props.ipAddressRequest();
+  }
+
+  handleFormSubmit = () => {
+    // check that all fields are filled
+    // check that checkbox is ticked
+    // check ipaddress is there
+    // if all ok, submitform
+    // else, show errors
   }
 
   render() {
     const benefitsImage = this.props.fullBenefits ? Benefits : Benefits2;
     let mainContent = null;
-    if (this.props.ipAddress) {
+    if (!this.props.ipAddress) {
       mainContent = (<List component={LoadingIndicator} />);
-    } else if (this.props.submitted) {
-      mainContent = (<ThankYouPage />);
     } else {
-      mainContent = (
-        <div>
-          <img className={styles.goproteksi} src={GoProteksi} alt="GoProteksi Logo" />
-          <form onSubmit={this.props.onSubmitForm} id="goproteksiform">
-            <FormTextInput type="text" name="name" label="Nama Lengkap" minLength="2" maxLength="100" />
-            <FormRadioInput name="gender" altname="Jenis Kelamin" options={genderOptions} />
-            <FormTextInput name="email" label="Email" minLength="7" maxLength="50" />
-            <FormTextInput name="mobileNumber" label="Nomor HP" minLength="10" maxLength="15" />
-            <FormTextInput name="simNumber" label="Nomor SIM" minLength="12" maxLength="12" />
-            <FormDatePicker name="simExpiryDate" title="Expiry Date SIM" />
-            <FormTextInput name="vehicleAge" label="Usia Kendaraan" minLength="1" maxLength="2" />
-            <FormTextInput name="vehiclePlate" label="Nomor Plat" minLength="3" maxLength="9" />
-            <img className={styles.benefits} src={benefitsImage} alt="Benefits" />
-            <FormCheckbox name="tncCheckbox" value="tncCheckbox" message={tncMessage} />
-            <FormButton name="submit" value="Daftar Sekarang" handleRoute={this.props.onSubmitForm} />
-          </form>
-        </div>
+      localstorage.setItem('ipAddress', this.props.ipAddress);
+      if (this.props.submitted) {
+        mainContent = (<ThankYouPage />);
+      } else {
+        mainContent = (
+          <div>
+            <img className={styles.goproteksi} src={GoProteksi} alt="GoProteksi Logo" />
+            <form onSubmit={this.props.onSubmitForm} id="goproteksiform">
+              <FormTextInput type="text" name="name" label="Nama Lengkap (Sesuai KTP)" minLength="2" maxLength="100" />
+              <FormRadioInput name="gender" altname="Jenis Kelamin" options={genderOptions} />
+              <FormTextInput name="email" label="Email" minLength="7" maxLength="50" />
+              <FormTextInput name="mobileNumber" label="Nomor HP (yang terdaftar di Gojek)" minLength="10" maxLength="15" />
+              <FormTextInput name="simNumber" label="Nomor SIM" minLength="12" maxLength="12" />
+              <FormDatePicker name="simExpiryDate" title="Expiry Date SIM" />
+              <FormTextInput name="vehicleAge" label="Usia Kendaraan" minLength="1" maxLength="2" />
+              <FormTextInput name="vehiclePlate" label="Nomor Plat" minLength="3" maxLength="9" />
+              <img className={styles.benefits} src={benefitsImage} alt="Benefits" />
+              <FormCheckbox name="tncCheckbox" value="tncCheckbox" message={tncMessage} />
+              <FormButton name="submit" value="Daftar Sekarang" handleRoute={this.handleFormSubmit} />
+            </form>
+          </div>
         );
+      }
     }
 
     return (
@@ -94,6 +105,7 @@ HomePage.propTypes = {
 
 export function mapDispatchToProps(dispatch) {
   return {
+    ipAddressRequest: () => dispatch(ipAddressRequest()),
     changeRoute: (url) => dispatch(push(url)),
     onSubmitForm: (evt) => {
       if (evt !== undefined && evt.preventDefault) evt.preventDefault();

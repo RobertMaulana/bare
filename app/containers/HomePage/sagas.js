@@ -1,7 +1,7 @@
 import { takeLatest } from 'redux-saga';
 import { call, put, fork } from 'redux-saga/effects';
-import { SUBMIT_FORM_REQUEST } from './constants';
-import { submitFormSuccess, submitFormFailure } from './actions';
+import { SUBMIT_FORM_REQUEST, IP_ADDRESS_REQUEST } from './constants';
+import { submitFormSuccess, submitFormFailure, ipAddressRequest, ipAddressSuccess } from './actions';
 
 import request from 'utils/request';
 
@@ -18,7 +18,7 @@ function* submitForm() {
   const vehiclePlate = localStorage.getItem('vehiclePlate');
   const simNumber = localStorage.getItem('simNumber');
   const simExpiryDate = localStorage.getItem('simExpiryDate');
-  const ipAddress = localStorage.getItem('ipAddress') || '1.1.1.1';
+  const ipAddress = localStorage.getItem('ipAddress');
 
   const params = {
     name,
@@ -58,7 +58,23 @@ function* defaultSaga() {
   yield fork(takeLatest, SUBMIT_FORM_REQUEST, submitForm);
 }
 
+function* ipAddressRequestSaga() {
+  const url = 'https://goproteksi.pasarpolis.com/getip';
+  const results = yield call(request, url);
+
+  if (!results.err) {
+    yield put(ipAddressSuccess(results.data));
+  } else {
+    yield put(ipAddressRequest());
+  }
+}
+
+function* ipSaga() {
+  yield fork(takeLatest, IP_ADDRESS_REQUEST, ipAddressRequestSaga);
+}
+
 // All sagas to be loaded
 export default [
   defaultSaga,
+  ipSaga,
 ];

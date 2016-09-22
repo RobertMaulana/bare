@@ -22,7 +22,7 @@ class FormCheckbox extends React.Component {
     localStorage.setItem(props.name, JSON.stringify(storedValues));
     this.state = {
       values: storedValues,
-      checked: props.isChecked || false,
+      checked: props.isChecked || true,
     };
   }
 
