@@ -6,7 +6,6 @@ import {
   UPDATE_VEHICLE_AGE,
   IP_ADDRESS_REQUEST,
   IP_ADDRESS_SUCCESS,
-  IP_ADDRESS_FAILURE,
 } from './constants';
 
 const initialState = fromJS({

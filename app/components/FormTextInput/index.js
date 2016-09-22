@@ -11,8 +11,6 @@ import classNames from 'classnames/bind';
 import TickIcon from './tick-icon.png';
 import styles from './styles.css';
 
-import { updateVehicleAge } from 'containers/HomePage/actions';
-
 class FormTextInput extends React.Component {
 
   constructor(props) {
@@ -161,7 +159,6 @@ class FormTextInput extends React.Component {
           this.setState({ isError: true });
         }
       } else if (e.target.name === 'vehicleAge') {
-        this.props.updateVehicleAge(e.target.value);
       } else if (e.target.name === 'vehiclePlate') {
         if (this.validPlatNumber(e.target.value)) {
           this.setState({ isError: false });
@@ -240,15 +237,6 @@ FormTextInput.propTypes = {
   type: PropTypes.string,
   maxLength: PropTypes.string,
   minLength: PropTypes.string,
-  updateVehicleAge: PropTypes.func,
 };
 
-export function mapDispatchToProps(dispatch) {
-  return {
-    updateVehicleAge: (age) => dispatch(updateVehicleAge(age)),
-    dispatch,
-  };
-}
-
-// export default FormTextInput;
-export default connect(null, mapDispatchToProps)(FormTextInput);
+export default FormTextInput;

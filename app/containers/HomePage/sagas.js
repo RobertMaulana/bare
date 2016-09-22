@@ -59,13 +59,12 @@ function* defaultSaga() {
 }
 
 function* ipAddressRequestSaga() {
-  const url = 'https://goproteksi.pasarpolis.com/getip';
+  const url = 'https://getip.pasarpolis.com';
   const results = yield call(request, url);
-
-  if (!results.err) {
-    yield put(ipAddressSuccess(results.data));
+  if (results.err === undefined || results.err === null) {
+    yield put(ipAddressSuccess(results.data.ipAddress));
   } else {
-    yield put(ipAddressRequest());
+    yield put(ipAddressRequest( ));
   }
 }
 
