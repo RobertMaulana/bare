@@ -16,7 +16,7 @@ import {
   selectIPAddress,
   selectFullBenefits,
 } from './selectors';
-import { submitFormRequest, ipAddressRequest } from './actions';
+import { submitFormRequest, ipAddressRequest, updateVehicleAge } from './actions';
 import { createStructuredSelector } from 'reselect';
 
 // import messages from './messages';
@@ -44,6 +44,29 @@ export class HomePage extends React.Component {
 
   componentDidMount() {
     this.props.ipAddressRequest();
+    this.startPolling();
+  }
+
+  componentWillUnmount() {
+    if (this._timer) {
+      clearInterval(this._timer);
+      this._timer = null;
+    }
+  }
+
+  startPolling() {
+    var self = this;
+    setTimeout(function() {
+      self.poll(); // do it once and then start it up ...
+      self._timer = setInterval(self.poll.bind(self), 1000);
+    }, 1000);
+  }
+
+  poll() {
+    const vehicleAge = localStorage.getItem('vehicleAge');
+    if (vehicleAge) {
+      this.props.updateVehicleAge(vehicleAge);
+    }
   }
 
   handleFormSubmit = () => {
@@ -53,7 +76,6 @@ export class HomePage extends React.Component {
     const checkBoxError = !this.refs.field9.state.checked;
     const error = textInputError || radioInputError || datePickerError || checkBoxError;
     if (error) {
-      // show error
       alert('Formulir anda tidak komplit/ada data yang salah. Harap di rubah sebelum lanjut registrasi');
     } else {
       // this.props.onSubmitForm();
@@ -112,6 +134,7 @@ HomePage.propTypes = {
 
 export function mapDispatchToProps(dispatch) {
   return {
+    updateVehicleAge: (age) => dispatch(updateVehicleAge(age)),
     ipAddressRequest: () => dispatch(ipAddressRequest()),
     changeRoute: (url) => dispatch(push(url)),
     onSubmitForm: (evt) => {
