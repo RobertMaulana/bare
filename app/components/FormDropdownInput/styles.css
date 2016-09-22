@@ -1,0 +1,65 @@
+.containerDropdown {
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 10px;
+  height: 70px;
+  width: 100%;
+  max-width: calc(768px + 16px * 2);
+  margin: 0 auto;
+  margin-bottom: 10px;
+}
+
+.containerDropdown .boxTitle {
+  width: 100%;
+  height: auto;
+  font-size: 12px;
+  color: #999;
+  margin-right: 0.5em;
+}
+
+.boxTitle .subtitle {
+  font-size: 10px;
+  color: #CCC;
+  position: relative;
+  top: -2px;
+  left: 3px;
+  font-style: italic;
+}
+
+.containerDropdown .formControl {
+  width: 100%;
+  height: 35px;
+  background-color: #FFF;
+  border: 1px solid #E1E1E1;
+  padding: 6px 11px;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #252525;
+  float: left;
+  margin-bottom: 13px;
+  outline: none;
+}
+
+.containerDropdown span {
+  font-size: 11px;
+  color: #252525;
+  font-weight: bold;
+  position: relative;
+  top: 3px;
+  left: 12px;
+}
+
+.containerDropdown .containerArrowDown {
+  width: 25px;
+  height: 25px;
+  float: right;
+  padding: 6px;
+  padding-top: 0;
+  background: #FFF;
+  margin-top: -44px;
+  margin-right: 5px;
+}
+
+.containerDropdown .valueText {
+  text-transform: capitalize;
+}
