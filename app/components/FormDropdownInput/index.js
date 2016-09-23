@@ -38,7 +38,7 @@ class FormDropdownInput extends React.Component {
       <div className={styles.containerDropdown}>
         <div className={styles.boxTitle}>{this.props.title}<span className={styles.subtitle}>{this.props.label}</span></div>
         <select name={this.props.name} className={styles.formControl} onChange={this.handleChange} defaultValue={this.state.value}>
-          <option value={this.props.firstOption} disabled="disabled">{this.props.title}</option>
+          <option disabled="disabled">{this.props.title}</option>
           {values}
         </select>
         <div className={styles.containerArrowDown}>
