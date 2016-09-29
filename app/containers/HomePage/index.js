@@ -138,6 +138,7 @@ HomePage.propTypes = {
   onSubmitForm: React.PropTypes.func,
   ipAddressRequest: React.PropTypes.func,
   updateVehicleAge: React.PropTypes.func,
+  params: React.PropTypes.object,
 };
 
 export function mapDispatchToProps(dispatch) {

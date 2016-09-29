@@ -21,7 +21,7 @@ function* submitForm() {
   const ipAddress = localStorage.getItem('ipAddress');
   const referrer = localStorage.getItem('referrer');
 
-  let params = {
+  const params = {
     name,
     gender,
     vehicleAge,
