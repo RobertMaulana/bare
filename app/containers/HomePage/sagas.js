@@ -19,8 +19,9 @@ function* submitForm() {
   const simNumber = localStorage.getItem('simNumber');
   const simExpiryDate = localStorage.getItem('simExpiryDate');
   const ipAddress = localStorage.getItem('ipAddress');
+  const referrer = localStorage.getItem('referrer');
 
-  const params = {
+  let params = {
     name,
     gender,
     vehicleAge,
@@ -31,6 +32,10 @@ function* submitForm() {
     simExpiryDate,
     ipAddress,
   };
+
+  if (referrer && referrer.length > 0) {
+    params.referrer = referrer;
+  }
 
   const options = {
     method: 'POST',
@@ -59,8 +64,8 @@ function* defaultSaga() {
 }
 
 function* ipAddressRequestSaga() {
-  // const url = 'https://getip.pasarpolis.com';
-  const url = 'https://lab.pasarpolis.com/getip';
+  const url = 'https://getip.pasarpolis.com';
+  // const url = 'https://lab.pasarpolis.com/getip';
   const results = yield call(request, url);
   if (results.err === undefined || results.err === null) {
     yield put(ipAddressSuccess(results.data.ipAddress));

@@ -47,6 +47,11 @@ export class HomePage extends React.Component {
   componentDidMount() {
     this.props.ipAddressRequest();
     this.startPolling();
+    if (this.props.params.referrer) {
+      localStorage.setItem('referrer', this.props.params.referrer);
+    } else {
+      localStorage.removeItem('referrer');
+    }
   }
 
   componentWillUnmount() {
