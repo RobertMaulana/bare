@@ -86,7 +86,7 @@ class FormTextInput extends React.Component {
   }
 
   validHPNumber(e) {
-    const hpNumberValidate = /^\+?620?8[0-9]{8,10}$|^08[0-9]{8,10}$/;
+    const hpNumberValidate = /^\+?620?8[0-9]{8,10}$|^08[0-9]{8,10}$|^0[0-9]{2}9[0-9]{8,10}$/;
     const matched = e.match(hpNumberValidate);
     return matched;
   }
