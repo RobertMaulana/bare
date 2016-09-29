@@ -64,8 +64,7 @@ function* defaultSaga() {
 }
 
 function* ipAddressRequestSaga() {
-  const url = 'https://getip.pasarpolis.com';
-  // const url = 'https://lab.pasarpolis.com/getip';
+  const url = 'https://lab.pasarpolis.com/v1/getip';
   const results = yield call(request, url);
   if (results.err === undefined || results.err === null) {
     yield put(ipAddressSuccess(results.data.ipAddress));
