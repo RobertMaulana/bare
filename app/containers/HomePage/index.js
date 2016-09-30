@@ -109,8 +109,8 @@ export class HomePage extends React.Component {
               <FormTextInput ref={(c) => { this.field4 = c; }} type="tel" name="mobileNumber" label="Nomor HP (yang terdaftar di Gojek)" minLength="10" maxLength="15" />
               <FormTextInput ref={(c) => { this.field5 = c; }} type="tel" name="simNumber" label="Nomor SIM" minLength="12" maxLength="12" />
               <FormDatePicker ref={(c) => { this.field6 = c; }} name="simExpiryDate" title="Expiry Date SIM" />
-              <FormDropdownInput ref={(c) => { this.field7 = c; }} title="Usia Kendaraan (tahun)" name="vehicleAge" firstOption={vehicleAges[0]} input={vehicleAges} />
               <FormTextInput ref={(c) => { this.field8 = c; }} name="vehiclePlate" label="Nomor Plat" minLength="3" maxLength="9" />
+              <FormDropdownInput ref={(c) => { this.field7 = c; }} title="Usia Kendaraan (tahun)" name="vehicleAge" firstOption={vehicleAges[0]} input={vehicleAges} />
               <img className={styles.benefits} src={benefitsImage} alt="Benefits" />
               <FormCheckbox ref={(c) => { this.field9 = c; }} name="tncCheckbox" value="tncCheckbox" message={tncMessage} />
               <FormButton name="submit" value="Daftar Sekarang" handleRoute={this.handleFormSubmit} />
