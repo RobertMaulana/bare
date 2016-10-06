@@ -104,9 +104,10 @@ export class HomePage extends React.Component {
           switch (this.props.params.referrer) {
             case 'barut':
               nameString = 'BARUT COMMUNITY';
+              localStorage.setItem('referrer', this.props.params.referrer);
               break;
             default:
-              // nameString = this.props.params.referrer;
+              localStorage.removeItem('referrer');
               break;
           }
         }
