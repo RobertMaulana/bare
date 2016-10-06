@@ -37,7 +37,7 @@ function* submitForm() {
     params.referrer = referrer;
   }
 
-  if (name == 'test') {
+  if (name === 'test') {
     params.isTest = 1;
   }
 

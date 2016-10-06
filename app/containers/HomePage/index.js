@@ -126,7 +126,7 @@ export class HomePage extends React.Component {
               <FormDropdownInput ref={(c) => { this.field7 = c; }} title="Tahun Kendaraan" name="vehicleYear" firstOption={vehicleYears[0]} input={vehicleYears} />
               <img className={styles.benefits} src={benefitsImage} alt="Benefits" />
               <FormCheckbox ref={(c) => { this.field9 = c; }} name="tncCheckbox" value="tncCheckbox" message={tncMessage} />
-              <h3 className={styles.title}>Selamat, anda telah di refer oleh<br /><span className={styles.titleName}>Bpk. Rahul Nambiar</span></h3>
+              <h3 className={styles.title}>Selamat, anda telah di refer oleh<br /><span className={styles.titleName}>{nameString}</span></h3>
               <FormButton name="submit" value="Daftar Sekarang" handleRoute={this.handleFormSubmit} />
             </form>
           </div>
@@ -143,7 +143,7 @@ export class HomePage extends React.Component {
               <FormTextInput ref={(c) => { this.field5 = c; }} type="tel" name="simNumber" label="Nomor SIM" minLength="12" maxLength="12" />
               <FormDatePicker ref={(c) => { this.field6 = c; }} name="simExpiryDate" title="Expiry Date SIM" />
               <FormTextInput ref={(c) => { this.field8 = c; }} name="vehiclePlate" label="Nomor Plat" minLength="3" maxLength="9" />
-              <FormDropdownInput ref={(c) => { this.field7 = c; }} title="Usia Kendaraan (tahun)" name="vehicleYear" firstOption={vehicleYears[0]} input={vehicleYears} />
+              <FormDropdownInput ref={(c) => { this.field7 = c; }} title="Tahun Kendaraan" name="vehicleYear" firstOption={vehicleYears[0]} input={vehicleYears} />
               <img className={styles.benefits} src={benefitsImage} alt="Benefits" />
               <FormCheckbox ref={(c) => { this.field9 = c; }} name="tncCheckbox" value="tncCheckbox" message={tncMessage} />
               <FormButton name="submit" value="Daftar Sekarang" handleRoute={this.handleFormSubmit} />
