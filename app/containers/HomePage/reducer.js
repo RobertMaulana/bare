@@ -3,7 +3,7 @@ import {
   SUBMIT_FORM_REQUEST,
   SUBMIT_FORM_SUCCESS,
   SUBMIT_FORM_FAILURE,
-  UPDATE_VEHICLE_AGE,
+  UPDATE_VEHICLE_YEAR,
   IP_ADDRESS_REQUEST,
   IP_ADDRESS_SUCCESS,
 } from './constants';
@@ -33,9 +33,9 @@ function homePageReducer(state = initialState, action = null) {
         .set('status', 'SUBMIT_FORM_FAILURE')
         .set('submitted', false)
         .set('error', true);
-    case UPDATE_VEHICLE_AGE:
+    case UPDATE_VEHICLE_YEAR:
       return state
-        .set('fullBenefits', action.data <= 5);
+        .set('fullBenefits', action.data >= 2012);
     case IP_ADDRESS_REQUEST:
       return state
         .set('ipAddress', false);

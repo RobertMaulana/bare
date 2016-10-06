@@ -2,7 +2,7 @@ import {
   SUBMIT_FORM_REQUEST,
   SUBMIT_FORM_SUCCESS,
   SUBMIT_FORM_FAILURE,
-  UPDATE_VEHICLE_AGE,
+  UPDATE_VEHICLE_YEAR,
   IP_ADDRESS_REQUEST,
   IP_ADDRESS_SUCCESS,
 } from './constants';
@@ -25,9 +25,9 @@ export function submitFormFailure() {
   };
 }
 
-export function updateVehicleAge(data) {
+export function updateVehicleYear(data) {
   return {
-    type: UPDATE_VEHICLE_AGE,
+    type: UPDATE_VEHICLE_YEAR,
     data,
   };
 }

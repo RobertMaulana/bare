@@ -12,7 +12,7 @@ function* submitForm() {
 
   const name = localStorage.getItem('name');
   const gender = localStorage.getItem('gender');
-  const vehicleAge = localStorage.getItem('vehicleAge');
+  const vehicleYear = localStorage.getItem('vehicleYear');
   const email = localStorage.getItem('email');
   const mobileNumber = localStorage.getItem('mobileNumber');
   const vehiclePlate = localStorage.getItem('vehiclePlate');
@@ -24,7 +24,7 @@ function* submitForm() {
   const params = {
     name,
     gender,
-    vehicleAge,
+    vehicleYear,
     email,
     mobileNumber,
     vehiclePlate,

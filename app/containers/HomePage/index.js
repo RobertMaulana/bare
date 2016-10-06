@@ -16,7 +16,7 @@ import {
   selectIPAddress,
   selectFullBenefits,
 } from './selectors';
-import { submitFormRequest, ipAddressRequest, updateVehicleAge } from './actions';
+import { submitFormRequest, ipAddressRequest, updateVehicleYear } from './actions';
 import { createStructuredSelector } from 'reselect';
 
 // import messages from './messages';
@@ -40,7 +40,7 @@ import Benefits2 from './benefits2.jpg';
 
 const tncMessage = 'Saya setuju untuk mengambil program asuransi dengan manfaat terlampir, dimana saya akan mengikuti program beli asuransi 2 bulan gratis 1 bulan dengan harga premi per bulan Rp. 15,000 yang akan di bayarkan melalui GO Credit saya.';
 const genderOptions = ['pria', 'wanita'];
-const vehicleAges = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10+'];
+const vehicleYears = ['2016', '2015', '2014', '2013', '2012', '2011', '2010', '2009', '2008', '2007', '2006', '2005', '2004', '2003', '2002', '2001', '2000'];
 
 export class HomePage extends React.Component {
 
@@ -70,9 +70,9 @@ export class HomePage extends React.Component {
   }
 
   poll() {
-    const vehicleAge = localStorage.getItem('vehicleAge');
-    if (vehicleAge) {
-      this.props.updateVehicleAge(vehicleAge);
+    const vehicleYear = localStorage.getItem('vehicleYear');
+    if (vehicleYear) {
+      this.props.updateVehicleYear(vehicleYear);
     }
   }
 
@@ -98,6 +98,40 @@ export class HomePage extends React.Component {
       localStorage.setItem('ipAddress', this.props.ipAddress);
       if (this.props.submitted) {
         mainContent = (<ThankYouPage fullBenefits={this.props.fullBenefits} />);
+      } else if (this.props.params.referrer && this.props.params.referrer.length > 0 ) {
+        let nameString = '';
+        console.log(this.props.params.referrer);
+        switch (this.props.params.referrer) {
+          case 'rahul':
+            nameString = 'Bpk. Rahul Nambiar';
+            break;
+          case 'cleo':
+            nameString = 'Bpk. Cleosent Randing';
+            break;
+          default:
+            nameString = this.props.params.referrer;
+            break;
+        }
+        mainContent = (
+          <div>
+            <h3 className={styles.title}>Selamat, anda telah di refer oleh<br /><span className={styles.titleName}>{nameString}</span></h3>
+            <img className={styles.goproteksi} src={GoProteksi} alt="GoProteksi Logo" />
+            <form onSubmit={this.props.onSubmitForm} id="goproteksiform">
+              <FormTextInput ref={(c) => { this.field1 = c; }} type="text" name="name" label="Nama Lengkap (Sesuai KTP)" minLength="2" maxLength="100" />
+              <FormRadioInput ref={(c) => { this.field2 = c; }} name="gender" altname="Jenis Kelamin" options={genderOptions} />
+              <FormTextInput ref={(c) => { this.field3 = c; }} type="email" name="email" label="Email" minLength="7" maxLength="50" />
+              <FormTextInput ref={(c) => { this.field4 = c; }} type="tel" name="mobileNumber" label="Nomor HP (yang terdaftar di Gojek)" minLength="10" maxLength="15" />
+              <FormTextInput ref={(c) => { this.field5 = c; }} type="tel" name="simNumber" label="Nomor SIM" minLength="12" maxLength="12" />
+              <FormDatePicker ref={(c) => { this.field6 = c; }} name="simExpiryDate" title="Expiry Date SIM" />
+              <FormTextInput ref={(c) => { this.field8 = c; }} name="vehiclePlate" label="Nomor Plat" minLength="3" maxLength="9" />
+              <FormDropdownInput ref={(c) => { this.field7 = c; }} title="Tahun Kendaraan" name="vehicleYear" firstOption={vehicleYears[0]} input={vehicleYears} />
+              <img className={styles.benefits} src={benefitsImage} alt="Benefits" />
+              <FormCheckbox ref={(c) => { this.field9 = c; }} name="tncCheckbox" value="tncCheckbox" message={tncMessage} />
+              <h3 className={styles.title}>Selamat, anda telah di refer oleh<br /><span className={styles.titleName}>Bpk. Rahul Nambiar</span></h3>
+              <FormButton name="submit" value="Daftar Sekarang" handleRoute={this.handleFormSubmit} />
+            </form>
+          </div>
+        );
       } else {
         mainContent = (
           <div>
@@ -110,7 +144,7 @@ export class HomePage extends React.Component {
               <FormTextInput ref={(c) => { this.field5 = c; }} type="tel" name="simNumber" label="Nomor SIM" minLength="12" maxLength="12" />
               <FormDatePicker ref={(c) => { this.field6 = c; }} name="simExpiryDate" title="Expiry Date SIM" />
               <FormTextInput ref={(c) => { this.field8 = c; }} name="vehiclePlate" label="Nomor Plat" minLength="3" maxLength="9" />
-              <FormDropdownInput ref={(c) => { this.field7 = c; }} title="Usia Kendaraan (tahun)" name="vehicleAge" firstOption={vehicleAges[0]} input={vehicleAges} />
+              <FormDropdownInput ref={(c) => { this.field7 = c; }} title="Usia Kendaraan (tahun)" name="vehicleYear" firstOption={vehicleYears[0]} input={vehicleYears} />
               <img className={styles.benefits} src={benefitsImage} alt="Benefits" />
               <FormCheckbox ref={(c) => { this.field9 = c; }} name="tncCheckbox" value="tncCheckbox" message={tncMessage} />
               <FormButton name="submit" value="Daftar Sekarang" handleRoute={this.handleFormSubmit} />
@@ -137,13 +171,13 @@ HomePage.propTypes = {
   fullBenefits: React.PropTypes.bool,
   onSubmitForm: React.PropTypes.func,
   ipAddressRequest: React.PropTypes.func,
-  updateVehicleAge: React.PropTypes.func,
+  updateVehicleYear: React.PropTypes.func,
   params: React.PropTypes.object,
 };
 
 export function mapDispatchToProps(dispatch) {
   return {
-    updateVehicleAge: (age) => dispatch(updateVehicleAge(age)),
+    updateVehicleYear: (year) => dispatch(updateVehicleYear(year)),
     ipAddressRequest: () => dispatch(ipAddressRequest()),
     changeRoute: (url) => dispatch(push(url)),
     onSubmitForm: (evt) => {

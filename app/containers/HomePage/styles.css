@@ -42,3 +42,22 @@ label {
 .benefits {
   width: 100%;
 }
+
+.title {
+  background-color: #EBEBEB;
+  font-size: 14px;
+  color: #040707;
+  text-align: center;
+  font-weight: 700;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-top: -10px;
+  margin-bottom: -10px;
+}
+
+.titleName {
+  font-size: 20px;
+  color: #3CB64B;
+  font-weight: 800;
+  text-decoration: underline;
+}
