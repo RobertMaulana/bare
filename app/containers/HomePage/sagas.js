@@ -37,6 +37,10 @@ function* submitForm() {
     params.referrer = referrer;
   }
 
+  if (name == 'test') {
+    params.isTest = 1;
+  }
+
   const options = {
     method: 'POST',
     headers: {
