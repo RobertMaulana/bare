@@ -98,58 +98,60 @@ export class HomePage extends React.Component {
       localStorage.setItem('ipAddress', this.props.ipAddress);
       if (this.props.submitted) {
         mainContent = (<ThankYouPage fullBenefits={this.props.fullBenefits} />);
-      } else if (this.props.params.referrer && this.props.params.referrer.length > 0) {
-        let nameString = '';
-        switch (this.props.params.referrer) {
-          case 'rahul':
-            nameString = 'Bpk. Rahul Nambiar';
-            break;
-          case 'cleo':
-            nameString = 'Bpk. Cleosent Randing';
-            break;
-          default:
-            nameString = this.props.params.referrer;
-            break;
-        }
-        mainContent = (
-          <div>
-            <h3 className={styles.title}>Selamat, anda telah di refer oleh<br /><span className={styles.titleName}>{nameString}</span></h3>
-            <img className={styles.goproteksi} src={GoProteksi} alt="GoProteksi Logo" />
-            <form onSubmit={this.props.onSubmitForm} id="goproteksiform">
-              <FormTextInput ref={(c) => { this.field1 = c; }} type="text" name="name" label="Nama Lengkap (Sesuai KTP)" minLength="2" maxLength="100" />
-              <FormRadioInput ref={(c) => { this.field2 = c; }} name="gender" altname="Jenis Kelamin" options={genderOptions} />
-              <FormTextInput ref={(c) => { this.field3 = c; }} type="email" name="email" label="Email" minLength="7" maxLength="50" />
-              <FormTextInput ref={(c) => { this.field4 = c; }} type="tel" name="mobileNumber" label="Nomor HP (yang terdaftar di Gojek)" minLength="10" maxLength="15" />
-              <FormTextInput ref={(c) => { this.field5 = c; }} type="tel" name="simNumber" label="Nomor SIM" minLength="12" maxLength="12" />
-              <FormDatePicker ref={(c) => { this.field6 = c; }} name="simExpiryDate" title="Expiry Date SIM" />
-              <FormTextInput ref={(c) => { this.field8 = c; }} name="vehiclePlate" label="Nomor Plat" minLength="3" maxLength="9" />
-              <FormDropdownInput ref={(c) => { this.field7 = c; }} title="Tahun Kendaraan" name="vehicleYear" firstOption={vehicleYears[0]} input={vehicleYears} />
-              <img className={styles.benefits} src={benefitsImage} alt="Benefits" />
-              <FormCheckbox ref={(c) => { this.field9 = c; }} name="tncCheckbox" value="tncCheckbox" message={tncMessage} />
-              <h3 className={styles.title}>Selamat, anda telah di refer oleh<br /><span className={styles.titleName}>{nameString}</span></h3>
-              <FormButton name="submit" value="Daftar Sekarang" handleRoute={this.handleFormSubmit} />
-            </form>
-          </div>
-        );
       } else {
-        mainContent = (
-          <div>
-            <img className={styles.goproteksi} src={GoProteksi} alt="GoProteksi Logo" />
-            <form onSubmit={this.props.onSubmitForm} id="goproteksiform">
-              <FormTextInput ref={(c) => { this.field1 = c; }} type="text" name="name" label="Nama Lengkap (Sesuai KTP)" minLength="2" maxLength="100" />
-              <FormRadioInput ref={(c) => { this.field2 = c; }} name="gender" altname="Jenis Kelamin" options={genderOptions} />
-              <FormTextInput ref={(c) => { this.field3 = c; }} type="email" name="email" label="Email" minLength="7" maxLength="50" />
-              <FormTextInput ref={(c) => { this.field4 = c; }} type="tel" name="mobileNumber" label="Nomor HP (yang terdaftar di Gojek)" minLength="10" maxLength="15" />
-              <FormTextInput ref={(c) => { this.field5 = c; }} type="tel" name="simNumber" label="Nomor SIM" minLength="12" maxLength="12" />
-              <FormDatePicker ref={(c) => { this.field6 = c; }} name="simExpiryDate" title="Expiry Date SIM" />
-              <FormTextInput ref={(c) => { this.field8 = c; }} name="vehiclePlate" label="Nomor Plat" minLength="3" maxLength="9" />
-              <FormDropdownInput ref={(c) => { this.field7 = c; }} title="Tahun Kendaraan" name="vehicleYear" firstOption={vehicleYears[0]} input={vehicleYears} />
-              <img className={styles.benefits} src={benefitsImage} alt="Benefits" />
-              <FormCheckbox ref={(c) => { this.field9 = c; }} name="tncCheckbox" value="tncCheckbox" message={tncMessage} />
-              <FormButton name="submit" value="Daftar Sekarang" handleRoute={this.handleFormSubmit} />
-            </form>
-          </div>
-        );
+        let nameString = '';
+        if (this.props.params.referrer && this.props.params.referrer.length > 0) {
+          switch (this.props.params.referrer) {
+            case 'barut':
+              nameString = 'BARUT COMMUNITY';
+              break;
+            default:
+              // nameString = this.props.params.referrer;
+              break;
+          }
+        }
+
+        if (nameString.length > 0) {
+          mainContent = (
+            <div>
+              <h3 className={styles.title}>Selamat, anda telah di refer oleh<br /><span className={styles.titleName}>{nameString}</span></h3>
+              <img className={styles.goproteksi} src={GoProteksi} alt="GoProteksi Logo" />
+              <form onSubmit={this.props.onSubmitForm} id="goproteksiform">
+                <FormTextInput ref={(c) => { this.field1 = c; }} type="text" name="name" label="Nama Lengkap (Sesuai KTP)" minLength="2" maxLength="100" />
+                <FormRadioInput ref={(c) => { this.field2 = c; }} name="gender" altname="Jenis Kelamin" options={genderOptions} />
+                <FormTextInput ref={(c) => { this.field3 = c; }} type="email" name="email" label="Email" minLength="7" maxLength="50" />
+                <FormTextInput ref={(c) => { this.field4 = c; }} type="tel" name="mobileNumber" label="Nomor HP (yang terdaftar di Gojek)" minLength="10" maxLength="15" />
+                <FormTextInput ref={(c) => { this.field5 = c; }} type="tel" name="simNumber" label="Nomor SIM" minLength="12" maxLength="12" />
+                <FormDatePicker ref={(c) => { this.field6 = c; }} name="simExpiryDate" title="Expiry Date SIM" />
+                <FormTextInput ref={(c) => { this.field8 = c; }} name="vehiclePlate" label="Nomor Plat" minLength="3" maxLength="9" />
+                <FormDropdownInput ref={(c) => { this.field7 = c; }} title="Tahun Kendaraan" name="vehicleYear" firstOption={vehicleYears[0]} input={vehicleYears} />
+                <img className={styles.benefits} src={benefitsImage} alt="Benefits" />
+                <FormCheckbox ref={(c) => { this.field9 = c; }} name="tncCheckbox" value="tncCheckbox" message={tncMessage} />
+                <h3 className={styles.title}>Selamat, anda telah di refer oleh<br /><span className={styles.titleName}>{nameString}</span></h3>
+                <FormButton name="submit" value="Daftar Sekarang" handleRoute={this.handleFormSubmit} />
+              </form>
+            </div>
+          );
+        } else {
+          mainContent = (
+            <div>
+              <img className={styles.goproteksi} src={GoProteksi} alt="GoProteksi Logo" />
+              <form onSubmit={this.props.onSubmitForm} id="goproteksiform">
+                <FormTextInput ref={(c) => { this.field1 = c; }} type="text" name="name" label="Nama Lengkap (Sesuai KTP)" minLength="2" maxLength="100" />
+                <FormRadioInput ref={(c) => { this.field2 = c; }} name="gender" altname="Jenis Kelamin" options={genderOptions} />
+                <FormTextInput ref={(c) => { this.field3 = c; }} type="email" name="email" label="Email" minLength="7" maxLength="50" />
+                <FormTextInput ref={(c) => { this.field4 = c; }} type="tel" name="mobileNumber" label="Nomor HP (yang terdaftar di Gojek)" minLength="10" maxLength="15" />
+                <FormTextInput ref={(c) => { this.field5 = c; }} type="tel" name="simNumber" label="Nomor SIM" minLength="12" maxLength="12" />
+                <FormDatePicker ref={(c) => { this.field6 = c; }} name="simExpiryDate" title="Expiry Date SIM" />
+                <FormTextInput ref={(c) => { this.field8 = c; }} name="vehiclePlate" label="Nomor Plat" minLength="3" maxLength="9" />
+                <FormDropdownInput ref={(c) => { this.field7 = c; }} title="Tahun Kendaraan" name="vehicleYear" firstOption={vehicleYears[0]} input={vehicleYears} />
+                <img className={styles.benefits} src={benefitsImage} alt="Benefits" />
+                <FormCheckbox ref={(c) => { this.field9 = c; }} name="tncCheckbox" value="tncCheckbox" message={tncMessage} />
+                <FormButton name="submit" value="Daftar Sekarang" handleRoute={this.handleFormSubmit} />
+              </form>
+            </div>
+          );
+        }
       }
     }
 
