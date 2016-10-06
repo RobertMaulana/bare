@@ -98,9 +98,8 @@ export class HomePage extends React.Component {
       localStorage.setItem('ipAddress', this.props.ipAddress);
       if (this.props.submitted) {
         mainContent = (<ThankYouPage fullBenefits={this.props.fullBenefits} />);
-      } else if (this.props.params.referrer && this.props.params.referrer.length > 0 ) {
+      } else if (this.props.params.referrer && this.props.params.referrer.length > 0) {
         let nameString = '';
-        console.log(this.props.params.referrer);
         switch (this.props.params.referrer) {
           case 'rahul':
             nameString = 'Bpk. Rahul Nambiar';
