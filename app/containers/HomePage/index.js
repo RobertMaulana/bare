@@ -38,7 +38,7 @@ import GoProteksi from './goproteksi.png';
 import Benefits from './benefits.jpg';
 import Benefits2 from './benefits2.jpg';
 
-const tncMessage = 'Saya setuju untuk mengambil program asuransi dengan manfaat terlampir, dimana saya akan mengikuti program beli asuransi 2 bulan gratis 1 bulan dengan harga premi per bulan Rp. 15,000 yang akan di bayarkan melalui GO Credit saya.';
+const tncMessage = 'Saya setuju untuk mengambil program beli asuransi 2 bulan gratis 1 bulan, dengan harga premi per bulan Rp.15,000 (Rp 30.000 untuk 2 bulan) yang akan di bayarkan melalui GO Credit saya. Saya menyadari bahwa asuransi saya hanya dapat dibatalkan setelah masa promo 3 bulan berlalu. Saya juga mengerti bahwa bila masa berlaku SIM saya kadaluarsa selama periode asuransi saya berlangsung, maka polis saya tidak berlaku & tidak bisa melakukan klaim.';
 const genderOptions = ['pria', 'wanita'];
 const vehicleYears = ['2016', '2015', '2014', '2013', '2012', '2011', '2010', '2009', '2008', '2007', '2006', '2005', '2004', '2003', '2002', '2001', '2000'];
 
