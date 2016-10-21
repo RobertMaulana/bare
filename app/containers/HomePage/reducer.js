@@ -6,6 +6,7 @@ import {
   UPDATE_VEHICLE_YEAR,
   IP_ADDRESS_REQUEST,
   IP_ADDRESS_SUCCESS,
+  RESET_SUBMITTED,
 } from './constants';
 
 const initialState = fromJS({
@@ -42,6 +43,10 @@ function homePageReducer(state = initialState, action = null) {
     case IP_ADDRESS_SUCCESS:
       return state
         .set('ipAddress', action.data);
+    case RESET_SUBMITTED:
+      return state
+        .set('status', 'SUBMIT_FORM_EMPTY')
+        .set('submitted', false);
     default:
       return state;
   }

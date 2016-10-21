@@ -5,6 +5,7 @@ import {
   UPDATE_VEHICLE_YEAR,
   IP_ADDRESS_REQUEST,
   IP_ADDRESS_SUCCESS,
+  RESET_SUBMITTED,
 } from './constants';
 
 export function submitFormRequest() {
@@ -42,5 +43,11 @@ export function ipAddressSuccess(data) {
   return {
     type: IP_ADDRESS_SUCCESS,
     data,
+  };
+}
+
+export function resetSubmitted() {
+  return {
+    type: RESET_SUBMITTED,
   };
 }

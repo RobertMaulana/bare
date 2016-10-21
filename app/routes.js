@@ -18,7 +18,7 @@ export default function createRoutes(store) {
 
   return [
     {
-      path: '/(:referrer)',
+      path: '/',
       name: 'home',
       getComponent(nextState, cb) {
         const importModules = Promise.all([
@@ -37,13 +37,6 @@ export default function createRoutes(store) {
         });
 
         importModules.catch(errorLoading);
-      },
-    }, {
-      path: '/thank-you',
-      getComponent(location, cb) {
-        System.import('components/ThankYouPage')
-          .then(loadModule(cb))
-          .catch(errorLoading);
       },
     }, {
       path: '*',

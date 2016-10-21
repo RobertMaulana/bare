@@ -41,6 +41,8 @@ class FormTextInput extends React.Component {
         break;
       case 'vehicleAge':
         break;
+      case 'policyNumber':
+        break;
       case 'vehiclePlate':
         errorState = !this.validPlatNumber(storedValue);
         errorMessage = 'Plat Nomor tidak valid';
@@ -70,6 +72,12 @@ class FormTextInput extends React.Component {
   onlyLetters(e) {
     const letterValidate = /^[a-zA-Z\s]*$/;
     const matched = e.match(letterValidate);
+    return matched;
+  }
+
+  validOfflinePolicy(e) {
+    const policyValidate = /^[0-9]{4}$/;
+    const matched = e.match(policyValidate);
     return matched;
   }
 
@@ -141,6 +149,13 @@ class FormTextInput extends React.Component {
           this.setState({ isError: false });
         } else {
           this.setState({ errorMessage: 'Email tidak valid' });
+          this.setState({ isError: true });
+        }
+      } else if (e.target.name === 'policyNumber') {
+        if (this.validOfflinePolicy(e.target.value)) {
+          this.setState({ isError: false });
+        } else {
+          this.setState({ errorMessage: 'Nomor Polis tidak valid' });
           this.setState({ isError: true });
         }
       } else if (e.target.name === 'mobileNumber') {

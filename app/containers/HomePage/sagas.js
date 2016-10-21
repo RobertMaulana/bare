@@ -18,8 +18,11 @@ function* submitForm() {
   const vehiclePlate = localStorage.getItem('vehiclePlate');
   const simNumber = localStorage.getItem('simNumber');
   const simExpiryDate = localStorage.getItem('simExpiryDate');
-  const ipAddress = localStorage.getItem('ipAddress');
-  const referrer = localStorage.getItem('referrer');
+  const ipAddress = '0.0.0.0';
+
+  const policyNumber = `TMIGP${localStorage.getItem('policyNumber')}`;
+  const origin = 'offline';
+  const specialist = localStorage.getItem('specialist');
 
   const params = {
     name,
@@ -31,15 +34,10 @@ function* submitForm() {
     simNumber,
     simExpiryDate,
     ipAddress,
+    policyNumber,
+    origin,
+    specialist,
   };
-
-  if (referrer && referrer.length > 0) {
-    params.referrer = referrer;
-  }
-
-  if (name === 'test') {
-    params.isTest = 1;
-  }
 
   const options = {
     method: 'POST',
@@ -50,11 +48,15 @@ function* submitForm() {
     body: JSON.stringify(params),
   };
 
+  console.log(params);
+  console.log(JSON.stringify(params));
+
   const results = yield call(request, url, options);
 
   if (!results.err) {
     if (results.data.return === 'GoProteksi registration successful') {
       yield put(submitFormSuccess(JSON.stringify(results.data.return)));
+      localStorage.clear();
     } else {
       yield put(submitFormFailure(JSON.stringify(results.data.return)));
     }
