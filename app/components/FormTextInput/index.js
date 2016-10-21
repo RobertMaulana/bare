@@ -100,7 +100,7 @@ class FormTextInput extends React.Component {
   }
 
   validSIMNumber(e) {
-    const simNumberValidate = /^[0-9]{12}$/;
+    const simNumberValidate = /^[0-9]{12,16}$/;
     const matched = e.match(simNumberValidate);
     return matched;
   }

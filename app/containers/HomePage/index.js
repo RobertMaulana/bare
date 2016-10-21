@@ -59,7 +59,7 @@ export class HomePage extends React.Component {
             <FormRadioInput ref={(c) => { this.field2 = c; }} name="gender" altname="Jenis Kelamin" options={genderOptions} />
             <FormTextInput ref={(c) => { this.field3 = c; }} type="email" name="email" label="Email" minLength="7" maxLength="50" />
             <FormTextInput ref={(c) => { this.field4 = c; }} type="tel" name="mobileNumber" label="Nomor HP (yang terdaftar di Gojek)" minLength="10" maxLength="15" />
-            <FormTextInput ref={(c) => { this.field5 = c; }} type="tel" name="simNumber" label="Nomor SIM" minLength="12" maxLength="12" />
+            <FormTextInput ref={(c) => { this.field5 = c; }} type="tel" name="simNumber" label="Nomor SIM" minLength="12" maxLength="16" />
             <FormDatePicker ref={(c) => { this.field6 = c; }} name="simExpiryDate" title="Masa Berlaku SIM" />
             <FormTextInput ref={(c) => { this.field8 = c; }} name="vehiclePlate" label="Nomor Plat" minLength="3" maxLength="9" />
             <FormDropdownInput ref={(c) => { this.field7 = c; }} title="Tahun Kendaraan" name="vehicleYear" firstOption={vehicleYears[0]} input={vehicleYears} />
