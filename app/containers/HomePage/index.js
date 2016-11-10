@@ -55,7 +55,7 @@ export class HomePage extends React.Component {
         <div>
           <form onSubmit={this.props.onSubmitForm} id="goproteksiform">
             <FormTextInput ref={(c) => { this.field1 = c; }} type="text" name="name" label="Nama Lengkap (Sesuai KTP)" minLength="2" maxLength="100" />
-            <FormTextInput ref={(c) => { this.field9 = c; }} type="text" name="policyNumber" label="Nomor Polis" minLength="4" maxLength="4" />
+            <FormTextInput ref={(c) => { this.field9 = c; }} type="text" name="policyNumber" label="Nomor Polis" minLength="4" maxLength="5" />
             <FormRadioInput ref={(c) => { this.field2 = c; }} name="gender" altname="Jenis Kelamin" options={genderOptions} />
             <FormTextInput ref={(c) => { this.field3 = c; }} type="email" name="email" label="Email" minLength="7" maxLength="50" />
             <FormTextInput ref={(c) => { this.field4 = c; }} type="tel" name="mobileNumber" label="Nomor HP (yang terdaftar di Gojek)" minLength="10" maxLength="15" />

@@ -76,7 +76,7 @@ class FormTextInput extends React.Component {
   }
 
   validOfflinePolicy(e) {
-    const policyValidate = /^[0-9]{4}$/;
+    const policyValidate = /^[0-9]{4,5}$/;
     const matched = e.match(policyValidate);
     return matched;
   }
