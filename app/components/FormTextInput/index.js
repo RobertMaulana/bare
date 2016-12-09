@@ -94,13 +94,13 @@ class FormTextInput extends React.Component {
   }
 
   validHPNumber(e) {
-    const hpNumberValidate = /^\+?620?8[0-9]{8,10}$|^08[0-9]{8,10}$|^0[0-9]{2}9[0-9]{8,10}$/;
+    const hpNumberValidate = /^\+?620?8[0-9]{8,20}$|^08[0-9]{8,20}$|^0[0-9]{2}9[0-9]{8,20}$/;
     const matched = e.match(hpNumberValidate);
     return matched;
   }
 
   validSIMNumber(e) {
-    const simNumberValidate = /^[0-9]{12,16}$/;
+    const simNumberValidate = /^[0-9]{12,26}$/;
     const matched = e.match(simNumberValidate);
     return matched;
   }
