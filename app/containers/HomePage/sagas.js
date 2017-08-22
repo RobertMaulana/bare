@@ -53,6 +53,8 @@ function* submitForm() {
 
   const results = yield call(request, url, options);
 
+  console.log(results);
+
   if (!results.err) {
     if (results.data.return === 'GoProteksi registration successful') {
       yield put(submitFormSuccess(JSON.stringify(results.data.return)));

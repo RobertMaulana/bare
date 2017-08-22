@@ -20,7 +20,7 @@ setup(app, {
 });
 
 // get the intended port number, use port 3000 if not provided
-const port = argv.port || process.env.PORT || 50005;
+const port = argv.port || process.env.PORT || 50099;
 
 // Start your app.
 app.listen(port, (err) => {
